@@ -9,14 +9,17 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css">
 <link rel="stylesheet" type="text/css" href="css/clearfix.css">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 
 
 <body>
 
-<div class="wrapper">
+
 <header>
+<div class="headerdiv_container">
 <div><img src="images/logo.png"><p>Ordering Management System</p></div>
+</div>
 
 <div>
 <!--this line of code below displays "welcome:"user's name""-->
@@ -26,5 +29,4 @@ if(isset($_SESSION['logged_in'])){
 }
 ?><?php */?>
 </header>
-
-
+<div class="wrapper">

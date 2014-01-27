@@ -1,0 +1,86 @@
+h1{
+	font-size:24px;
+	color:#717174;
+	width:100%;
+	padding:10px 0px;
+	text-align:center;
+	font-weight:bold;
+	margin-bottom:20px;
+	margin-top:20px;
+}
+
+form{
+	height: 300px;
+	background-color: rgb(193, 215, 46);
+	width: 500px;
+	border-radius: 6px;
+	border: 1px rgba(0, 0, 0, 0.1) solid;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+form div{
+	margin:0 auto;
+	overflow:hidden;
+	width:300px;
+}
+p{
+	padding-bottom:10px;
+}
+
+.sign_up{
+	text-align: center;
+}
+
+.sign_up_link:link{
+	color:#717174;
+	-o-transition:color .8s ease-out;
+  	-ms-transition:color .8s ease-out;
+  	-moz-transition:color .8s ease-out;
+  	-webkit-transition:color .8s ease-out;
+ 	 transition:color .8s ease-out;
+}
+.sign_up_link:visited{color:#717174;}
+.sign_up_link:hover{
+	color:#333;
+	-o-transition:color .8s ease-out;
+  	-ms-transition:color .8s ease-out;
+  	-moz-transition:color .8s ease-out;
+  	-webkit-transition:color .8s ease-out;
+ 	 transition:color .8s ease-out;
+}
+.sign_up_link:active{color:#333;}
+
+input{
+    width:275px;
+    height:27px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#717174;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+	font-size:18px;
+}
+input:focus, textarea:focus {
+    outline-color:#717174;
+}
+input[type=submit] {
+	padding:5px 15px; 
+	background:#717174; 
+	border:0 none;
+	cursor:pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+	width: 90px;
+	color: #FFF;
+	height: 32px;
+	font-size:18px;
+	transition:background-color .8s;
+}
+input[type=submit]:hover{
+	background-color:#333;
+	transition:background-color .8s;
+}
