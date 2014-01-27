@@ -18,7 +18,7 @@
 
 <header>
 <div class="headerdiv_container">
-<div><img src="images/logo.png"><p>Ordering Management System</p></div>
+<a href="index.php"><div><img src="images/logo.png"><p>Ordering Management System</p></div></a>
 </div>
 
 <div>
