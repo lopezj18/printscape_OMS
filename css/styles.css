@@ -1,0 +1,26 @@
+html{
+	font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:16px;
+}
+
+.wrapper{
+	width:960px;
+	margin:0 auto;
+}
+
+header{
+	overflow: hidden;
+	margin-top: 30px;
+}
+
+header div{
+	width:400px;
+	float:left;
+}
+
+header div p{
+	font-size:20px;
+	color:#2E2E2E;
+	margin:0px;
+	font-weight: bold;
+}
