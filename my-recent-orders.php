@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -12,11 +13,11 @@ include("header.php");
 .tftable tr:hover {background-color:#f3fcb9;}
 </style>
 
-<h1 class="h1_titles">Customer Details</h1>
+<h1 class="h1_titles">My Recent Orders</h1>
 <table class="tftable" border="1">
-<tr><th>Customer Id</th><th>Customer Name</th><th>Phone Number</th><th>Email Address</th><th>Address</th><th>Recent Orders</th></tr>
+<tr><th>Order Id</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>Download File</th><th>Details</th><th>Delete</th></tr>
 
-<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>View</td></tr>
+<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>Cell:6</td><td>Cell:6</td><td>Cell:7</td><td>Cell:8</td><td>Cell:9</td></tr>
 
 </table>
 
