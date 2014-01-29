@@ -2,6 +2,8 @@
 
 session_start();
 include("header.php");
+require_once("functions-lib.php");
+require_once("test_functions.php");
 ?>
 
 <style type="text/css">
@@ -16,7 +18,12 @@ include("header.php");
 <table class="tftable" border="1">
 <tr><th>Customer Id</th><th>Customer Name</th><th>Phone Number</th><th>Email Address</th><th>Address</th><th>Recent Orders</th></tr>
 
-<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>View</td></tr>
+<?php
+	$users = test1();
+	get_users($users, $page_number);
+?>
+
+<!--<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>View</td></tr>-->
 
 </table>
 
