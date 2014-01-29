@@ -16,12 +16,13 @@ require_once("test_functions.php");
 
 <h1 class="h1_titles">Customer Details</h1>
 <table class="tftable" border="1">
-<tr><th>Customer Id</th><th>Customer Name</th><th>Phone Number</th><th>Email Address</th><th>Address</th><th>Recent Orders</th></tr>
+<tr><th>User Id</th><th>Company</th><th>Address 1</th><th>Address 2</th><th>City</th><th>State</th><th>Zip</th><th>Phone Number</th></tr>
 
 <?php
-	$users = test1();
+	$users = test();
 	get_users($users, $page_number);
 ?>
+
 
 <!--<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>View</td></tr>-->
 

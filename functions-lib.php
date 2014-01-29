@@ -1,6 +1,5 @@
 <?php //test_functions.php
 function check_login($username, $password){
-	include('db-connect.php');
 		//call the run_my_query()function from that include
 		$result = run_my_query("SELECT * FROM users 
 			WHERE username='$username'
@@ -32,6 +31,18 @@ function check_login($username, $password){
 }
 function run_my_query($query){
 //run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)
+require_once('db_info.php');
+
+//figure this shit out...
+$mysqli = new mysqli($hname, $uname, $pass, $db);
+//for troubleshooting, this willmake a custom message apear if line 3 had a problem
+if($mysqli -> connect_errno){
+	echo "connection problem on line 9:".$mysqli ->
+connect_error;
+}	
+
+
+
 $result = $mysqli -> query($query) or die ('problem on line 14: '.$mysqli -> error);
 //close connection
 mysqli_close($mysqli);
@@ -40,13 +51,35 @@ return $result;
 
 }//closes the funtion on line 4
 include('test_functions.php');
-function get_users($users, $page_number){
 
-	for($i=0; $i<(20*$page_number); $i++){
-		$results = "<tr><td>".$user['user_id']."</td><td>".$user['username']."</tr>";
+
+function get_users($users){
+
+	for($i=0; $i<(20); $i++){
+		$results = "<tr><td>".$user_id['user_id']."</td><td>".$user['username']."</tr>";
 	}
 	return $results;
 }
+
+
+function get_order($jobs){
+	for($i=0; $i<(3); $i++){
+		
+		$results .="<tr><td>".$jobs[$i]['job_id']."</td>";
+		$results .="<td>".$jobs[$i]['customer_name']."</td>";
+		$results .="<td>".$jobs[$i]['order_name']."</td>";
+		$results .="<td>".$jobs[$i]['type']."</td>";
+		$results .="<td>".$jobs[$i]['due_date']->format('m-d-Y')."</td>";
+		$results .="<td>".$jobs[$i]['date_submited']->format('m-d-Y')."</td>";
+		$results .="<td>".$jobs[$i]['status']."</td>";
+		$results .="<td>".$jobs[$i]['file']."</td>";
+		$results .="<td>".$jobs[$i]['instructions']."</td>";
+		$results .="<td>".$jobs[$i]['delete']."</td></tr>";
+		
+	}
+	return $results;
+}
+
 
 function sanitize($variable){
 	if(get_magic_quotes_gpc()) $variable = stripslashes($variable);

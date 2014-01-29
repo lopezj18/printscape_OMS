@@ -1,5 +1,5 @@
 <?php 
-function test1(){
+function test(){
 	$users = array();
 	$users[0]['user_id'] = 0;
 	$users[0]['username'] = 'jsmith';
@@ -11,13 +11,39 @@ function test1(){
 }
 
 function test2(){
-	$jobs = array();
-	$jobs[0]['job_id'] = 0;
-	$jobs[0]['type'] = 'jsmith';
-	$jobs[0]['location'] = 'John';
-	$jobs[0]['last_name'] = 'Smith';
-	$jobs[0]['email'] = 'jsmith@testcompany.com';
-	$jobs[0]['date_created'] = new DateTime("2014-01-02 11:14:15");
+	$jobs[0]['job_id'] = 1;
+	$jobs[0]['customer_name'] = 'joe joehanson';
+	$jobs[0]['order_name'] = 'meow';
+	$jobs[0]['type'] = 'carwrap';
+	$jobs[0]['due_date'] = new DateTime("2014-01-06 11:14:15");
+	$jobs[0]['date_submited'] = new DateTime("2014-01-02 11:14:15");
+	$jobs[0]['status'] = 'pending';
+	$jobs[0]['file'] = 'orders/printfiles/car.pdf';
+	$jobs[0]['instructions'] = 'blahhh blah';
+	$jobs[0]['delete'] = 'delete';
+	
+	$jobs[1]['job_id'] = 1;
+	$jobs[1]['customer_name'] = 'joe joehanson';
+	$jobs[1]['order_name'] = 'meow';
+	$jobs[1]['type'] = 'carwrap';
+	$jobs[1]['due_date'] = new DateTime("2014-01-06 11:14:15");
+	$jobs[1]['date_submited'] = new DateTime("2014-01-02 11:14:15");
+	$jobs[1]['status'] = 'pending';
+	$jobs[1]['file'] = 'orders/printfiles/car.pdf';
+	$jobs[1]['instructions'] = 'blahhh blah';
+	$jobs[1]['delete'] = 'delete';
+	
+	$jobs[2]['job_id'] = 1;
+	$jobs[2]['customer_name'] = 'joe joehanson';
+	$jobs[2]['order_name'] = 'meow';
+	$jobs[2]['type'] = 'carwrap';
+	$jobs[2]['due_date'] = new DateTime("2014-01-06 11:14:15");
+	$jobs[2]['date_submited'] = new DateTime("2014-01-02 11:14:15");
+	$jobs[2]['status'] = 'pending';
+	$jobs[2]['file'] = 'orders/printfiles/car.pdf';
+	$jobs[2]['instructions'] = ' blah';
+	$jobs[2]['delete'] = 'delete';
+return $jobs;
 }
 
 ?>
