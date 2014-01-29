@@ -26,6 +26,7 @@ function check_login($username, $password){
 		//otherwise
 		}else{
 			//send them back and trigger a message
+			
 			echo "invalid user";
 		}
 }
@@ -53,10 +54,17 @@ return $result;
 include('test_functions.php');
 
 
-function get_users($users){
+function get_clients($customers){
 
-	for($i=0; $i<(20); $i++){
-		$results = "<tr><td>".$user_id['user_id']."</td><td>".$user['username']."</tr>";
+	for($i=0; $i<(1); $i++){
+		$results .="<tr><td>".$customers[$i]['user_id']."</td>";
+		$results .="<td>".$customers[$i]['company_name']."</td>";
+		$results .="<td>".$customers[$i]['address_1']."</td>";
+		$results .="<td>".$customers[$i]['address_2']."</td>";
+		$results .="<td>".$customers[$i]['city']->format('m-d-Y')."</td>";
+		$results .="<td>".$customers[$i]['state']->format('m-d-Y')."</td>";
+		$results .="<td>".$customers[$i]['zip']."</td>";
+		$results .="<td>".$customers[$i]['phone_number']."</td></tr>";
 	}
 	return $results;
 }

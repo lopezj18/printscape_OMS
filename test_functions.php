@@ -1,5 +1,5 @@
 <?php 
-function test(){
+function users(){
 	$users = array();
 	$users[0]['user_id'] = 0;
 	$users[0]['username'] = 'jsmith';
@@ -10,7 +10,34 @@ function test(){
 
 }
 
-function test2(){
+function customers(){
+	$customers = array();
+	$customers[0]['user_id'] = 0;
+	$customers[0]['user_id'] = 'Cool Company';
+	$customers[0]['email'] = 'jsmith@testcompany.com';
+	$customers[0]['address_1'] = '2255 Example rd';
+	$customers[0]['address_2'] = 'Building 3';
+	$customers[0]['city'] = 'Smith';
+	$customers[0]['state'] = 'PA';
+	$customers[0]['zip'] = '15071';
+	$customers[0]['phone_number'] = '440-132-1254';
+	$customers[0]['date_created'] = new DateTime("2014-01-02 11:14:15");
+	
+	$customers = array();
+	$customers[1]['user_id'] = 1;
+	$customers[1]['user_id'] = 'Cool Company';
+	$customers[1]['email'] = 'jsmith@testcompany.com';
+	$customers[1]['address_1'] = '2255 Example rd';
+	$customers[1]['address_2'] = 'Building 3';
+	$customers[1]['city'] = 'Smith';
+	$customers[1]['state'] = 'PA';
+	$customers[1]['zip'] = '15171';
+	$customers[1]['phone_number'] = '441-132-1254';
+	$customers[1]['date_created'] = new DateTime("2014-01-02 11:14:15");
+
+}
+
+function jobs(){
 	$jobs[0]['job_id'] = 1;
 	$jobs[0]['customer_name'] = 'joe joehanson';
 	$jobs[0]['order_name'] = 'meow';

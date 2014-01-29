@@ -12,14 +12,19 @@ include("functions-lib.php");
 .tftable tr {background-color:#ffffff;}
 .tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
 .tftable tr:hover {background-color:#f3fcb9;}
+h2{padding: 20px 10px 0 0; font-size:18px; width:100%; text-align:right;}
+a:link{color:#9fa615;}
+a:visited{color:#9fa615;}
+a:hover{color:white;}
+a:active{color:white;}
 </style>
-
+<h2><a href="admin-all-clients.php">View All Clients</a></h2>
 <h1 class="h1_titles">Recent Orders</h1>
 <table class="tftable" border="1">
 <tr><th>Id#</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
 
 <?php
-	$jobs = test2();
+	$jobs = jobs();
 	echo get_order($jobs);
 ?>
 

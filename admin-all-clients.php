@@ -3,7 +3,6 @@
 session_start();
 include("header.php");
 require_once("functions-lib.php");
-require_once("test_functions.php");
 ?>
 
 <style type="text/css">
@@ -19,8 +18,8 @@ require_once("test_functions.php");
 <tr><th>User Id</th><th>Company</th><th>Address 1</th><th>Address 2</th><th>City</th><th>State</th><th>Zip</th><th>Phone Number</th></tr>
 
 <?php
-	$users = test();
-	get_users($users, $page_number);
+	$customers = customers();
+	echo get_clients($customers);
 ?>
 
 
