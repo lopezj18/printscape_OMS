@@ -1,3 +1,5 @@
+assssssssssssssssssssssssssssssss
+
 <?php //test_functions.php
 function check_login($username, $password){
 		//call the run_my_query()function from that include
