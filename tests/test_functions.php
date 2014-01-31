@@ -41,14 +41,13 @@ function insert_users($users){
 }
 
 function test1(){
-	$users = new array();
+	$users =  array();
 	$users[0]['user_id'] => 0;
 	$users[0]['username'] => 'jsmith';
 	$users[0]['first_name'] => 'John';
 	$users[0]['last_name'] => 'Smith';
 	$users[0]['email'] => 'jsmith@testcompany.com';
 	$users[0]['date_created'] => new DateTime("2014-01-02 11:14:15");
-
 }
 
 function get_users($users, $page_number){
