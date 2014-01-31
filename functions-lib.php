@@ -101,11 +101,13 @@ function get_order($jobs){
 
 		if(count($instructions) > 40){
 			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, 40));
-			$results .="<td class='expandable_row'><div class='except'>".$excerpt."</div><div class='full_instructions'>".$instructions."</div><img class='expandable_arrow' src='images/expandable_arrow.png' alt='hover to expand'/></td>";
+			$results .="<td class='expandable_row'>
+				<div class='except'>".$excerpt."</div>
+				<div class='full_instructions'>".$instructions."</div>
+				<img class='expandable_arrow' src='images/expandable_arrow.png' alt='hover to expand'/>
+			</td>";
 		}
-		else{
-			$results .="<td>".$jobs[$i]['instructions']."</td>";
-		}
+		else $results .="<td>".$jobs[$i]['instructions']."</td>";
 
 		$results .="<td>".$jobs[$i]['delete']."</td></tr>";
 		
