@@ -38,7 +38,7 @@
 	border-color:#a9a9a9;
 	max-width: 240px;
 	line-height:18px;
-	height:20px;
+	max-height:20px;
 	white-space:nowrap;
 	overflow: hidden;
 	transition:height ease-in .2s;
@@ -49,3 +49,15 @@
 	white-space:normal;
 	transition:height ease-out .2s;
 }
+
+.expandable_arrow{
+	float: right;
+	position: relative;
+	top: -26px;
+	right: -8px;
+}
+.expandable_arrow:hover{
+	display:none;
+	visibility:hidden;
+}
+
