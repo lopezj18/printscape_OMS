@@ -29,7 +29,7 @@ a:active{color:white;}
 
 
 <?php
-include("footer.php");
+require_once("footer.php");
 ?>
 
 
