@@ -11,6 +11,7 @@ function check_login($username, $password){
 		
 		//get the pointer to point at the first row retried by the select
 		$result -> data_seek(0);
+		
 		if($row = $result -> fetch_assoc()){
 		
 			//do goo thing :remember that they're logged in 
@@ -27,7 +28,7 @@ function check_login($username, $password){
 		}else{
 			//send them back and trigger a message
 			
-			echo "invalid user";
+			echo "<h1 class='invalid-user'>Incorrect User Name or Password!!</h1>";
 		}
 }
 function run_my_query($query){
@@ -53,18 +54,30 @@ return $result;
 }//closes the funtion on line 4
 include('test_functions.php');
 
+function get_userinfo($users){
+	for($i=0; $i<(4); $i++){
+		$results .="<tr><td>".$users[$i]['user_id']."</td>";
+		$results .="<td>".$users[$i]['username']."</td>";
+		$results .="<td>".$users[$i]['first_name']."</td>";
+		$results .="<td>".$users[$i]['last_name']."</td>";
+		$results .="<td>".$users[$i]['email']."</td>";
+		$results .="<td>".$users[$i]['date_created']->format('m-d-Y')."</td></tr>";
+	}
+	return $results;
+}
 
 function get_clients($customers){
 
-	for($i=0; $i<(1); $i++){
+	for($i=0; $i<(2); $i++){
 		$results .="<tr><td>".$customers[$i]['user_id']."</td>";
 		$results .="<td>".$customers[$i]['company_name']."</td>";
 		$results .="<td>".$customers[$i]['address_1']."</td>";
 		$results .="<td>".$customers[$i]['address_2']."</td>";
-		$results .="<td>".$customers[$i]['city']->format('m-d-Y')."</td>";
-		$results .="<td>".$customers[$i]['state']->format('m-d-Y')."</td>";
+		$results .="<td>".$customers[$i]['city']."</td>";
+		$results .="<td>".$customers[$i]['state']."</td>";
 		$results .="<td>".$customers[$i]['zip']."</td>";
-		$results .="<td>".$customers[$i]['phone_number']."</td></tr>";
+		$results .="<td>".$customers[$i]['phone_number']."</td>";
+		$results .="<td>".$customers[$i]['date_created']->format('m-d-Y')."</td></tr>";
 	}
 	return $results;
 }

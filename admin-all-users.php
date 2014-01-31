@@ -16,14 +16,17 @@ a:active{color:white;}
 <h2><a href="admin-all-users.php">View All Users</a></h2>
 <h2><a href="admin-recent-orders.php">View Recent Orders</a></h2>
 <h2><a href="logout.php">Log Out</a></h2>
-<h1 class="h1_titles">Recent Orders</h1>
+<h1 class="h1_titles">All Users</h1>
 <table class="tftable" border="1">
-<tr><th>Id#</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
+<tr><th>User Id</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Date Created</th></tr>
 
 <?php
-	$jobs = jobs();
-	echo get_order($jobs);
+	$users = users();
+	echo get_userinfo($users);
 ?>
+
+
+<!--<tr><td>Cell:1</td><td>Cell:2</td><td>Cell:3</td><td>Cell:4</td><td>Cell:5</td><td>View</td></tr>-->
 
 </table>
 

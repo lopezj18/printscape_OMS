@@ -24,11 +24,11 @@ function check_login($username, $password){
 			$_SESSION['username'] = $row['username'];
 			$_SESSION['logged_in'] = true;
 			//redirect them to view home page
-			header('Location:schedule.php');
+			header('Location:login.php');
 		//otherwise
 		}else{
 			//send them back and trigger a message
-			echo "invalid user";
+			echo "<h1>Incorrect User Name or Password</h1>";
 		}
 }
 ?>

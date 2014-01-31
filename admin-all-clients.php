@@ -1,21 +1,24 @@
 <?php
-
 session_start();
-include("header.php");
+require_once("header.php");
 require_once("functions-lib.php");
+require_once("authenticate.php");
 ?>
 
 <style type="text/css">
-.tftable {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #a9a9a9;border-collapse: collapse; margin-top:20px;}
-.tftable th {font-size:12px;background-color:#c1d72e;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;text-align:left; font-weight:bold;}
-.tftable tr {background-color:#ffffff;}
-.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
-.tftable tr:hover {background-color:#f3fcb9;}
+h2{padding:10px 10px 0 0; font-size:18px; width:100%; text-align:right;}
+a:link{color:#9fa615;}
+a:visited{color:#9fa615;}
+a:hover{color:white;}
+a:active{color:white;}
 </style>
-
-<h1 class="h1_titles">Customer Details</h1>
+<h2><a href="admin-all-clients.php">View All Clients</a></h2>
+<h2><a href="admin-all-users.php">View All Users</a></h2>
+<h2><a href="admin-recent-orders.php">View Recent Orders</a></h2>
+<h2><a href="logout.php">Log Out</a></h2>
+<h1 class="h1_titles">All Clients</h1>
 <table class="tftable" border="1">
-<tr><th>User Id</th><th>Company</th><th>Address 1</th><th>Address 2</th><th>City</th><th>State</th><th>Zip</th><th>Phone Number</th></tr>
+<tr><th>User Id</th><th>Company</th><th>Address 1</th><th>Address 2</th><th>City</th><th>State</th><th>Zip</th><th>Phone Number</th><th>Date Created</th></tr>
 
 <?php
 	$customers = customers();
@@ -29,7 +32,7 @@ require_once("functions-lib.php");
 
 
 <?php
-include("footer.php");
+require_once("footer.php");
 ?>
 
 
