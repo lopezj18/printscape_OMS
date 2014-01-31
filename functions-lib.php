@@ -96,7 +96,17 @@ function get_order($jobs){
 		$results .="<td>".$jobs[$i]['date_submited']->format('m-d-Y')."</td>";
 		$results .="<td>".$jobs[$i]['status']."</td>";
 		$results .="<td>".$jobs[$i]['file']."</td>";
-		$results .="<td>".$jobs[$i]['instructions']."</td>";
+		
+		$instructions = $jobs[$i]['instructions'];
+
+		if(count($instructions) > 40){
+			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, 40));
+			$results .="<td class='expandable_row'><div class='except'>".$excerpt."</div><div class='full_instructions'>".$instructions."</div><img class='expandable_arrow' src='images/expandable_arrow.png' alt='hover to expand'/></td>";
+		}
+		else{
+			$results .="<td>".$jobs[$i]['instructions']."</td>";
+		}
+
 		$results .="<td>".$jobs[$i]['delete']."</td></tr>";
 		
 	}
