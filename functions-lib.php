@@ -96,9 +96,10 @@ function get_order($jobs){
 		$results .="<td>".$jobs[$i]['file']."</td>";
 		
 		$instructions = $jobs[$i]['instructions'];
-
-		if(strlen($instructions) > 40){
-			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, 40));
+		$max_length = 35;
+		if(strlen($instructions) > $max_length){
+			echo "max length exceeded";
+			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $max_length));
 			$results .="<td class='expandable_row'>
 				<div class='except'>".$excerpt."</div>
 				<div class='full_instructions'>".$instructions."</div>
@@ -108,11 +109,9 @@ function get_order($jobs){
 		else $results .="<td>".$jobs[$i]['instructions']."</td>";
 
 		$results .="<td>".$jobs[$i]['delete']."</td></tr>";
-		
 	}
 	return $results;
 }
-
 
 function sanitize($variable){
 	if(get_magic_quotes_gpc()) $variable = stripslashes($variable);
