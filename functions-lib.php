@@ -23,7 +23,7 @@ function check_login($username, $password){
 			$_SESSION['username'] = $row['username'];
 			$_SESSION['logged_in'] = true;
 			//redirect them to view home page
-			header('Location:admin-recent-orders.php');
+		header('Location:admin-recent-orders.php');
 		//otherwise
 		}else{
 			//send them back and trigger a message
