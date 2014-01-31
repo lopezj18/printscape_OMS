@@ -32,15 +32,15 @@ function check_login($username, $password){
 		}
 }
 function run_my_query($query){
-//run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)
-require_once('db_info.php');
+	//run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)
+	require_once('db_info.php');
 
-//figure this shit out...
-$mysqli = new mysqli($hname, $uname, $pass, $db);
-//for troubleshooting, this willmake a custom message apear if line 3 had a problem
-if($mysqli -> connect_errno){
-	echo "connection problem on line 9:".$mysqli ->
-connect_error;
+	//figure this shit out...
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+	//for troubleshooting, this willmake a custom message apear if line 3 had a problem
+	if($mysqli -> connect_errno){
+		echo "connection problem on line 9:".$mysqli ->
+	connect_error;
 }	
 
 

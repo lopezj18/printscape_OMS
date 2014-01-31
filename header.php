@@ -1,30 +1,20 @@
-
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-<title>Printscape</title>
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<link rel="stylesheet" type="text/css" href="css/clearfix.css">
-<link rel="stylesheet" type="text/css" href="css/styles.css">
-<link rel="stylesheet" type="text/css" href="css/tables.css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
+	<meta charset="utf-8">
+	<!-- May not want to set NO-CACHE here -->
+	<!-- <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"> -->
+	<title>Printscape</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/clearfix.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/tables.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
-
-
 <body>
-
-
-<header>
-<div class="headerdiv_container">
-<a href="index.php"><div><img src="images/logo.png"><p>Ordering Management System</p></div></a>
-</div>
-<!--this line of code below displays "welcome:"user's name""-->
-<?php /*?><?php
-if(isset($_SESSION['logged_in'])){
- echo $welcome;echo $_SESSION['username'];
-}
-?><?php */?>
-</header>
-<div class="wrapper">
+	<header>
+		<div class="headerdiv_container">
+			<a href="index.php"><div><img src="images/logo.png"><p>Ordering Management System</p></div></a>
+		</div>
+	</header>
+	<div class="wrapper">
