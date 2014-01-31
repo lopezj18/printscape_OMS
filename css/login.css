@@ -18,6 +18,10 @@ form{
 	margin: 0 auto;
 	margin-top: 100px;
 }
+.submit_order{
+	height: 645px;
+	margin-top: 0px;
+}
 form div{
 	margin:0 auto;
 	overflow:hidden;
@@ -83,4 +87,22 @@ input[type=submit] {
 input[type=submit]:hover{
 	background-color:#333;
 	transition:background-color .8s;
+}
+
+textarea{
+    width:275px;
+    height:90px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#717174;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+	font-size:18px;
+}
+textarea:focus, textarea:focus {
+    outline-color:#717174;
 }
