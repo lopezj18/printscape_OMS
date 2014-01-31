@@ -97,7 +97,7 @@ function get_order($jobs){
 		
 		$instructions = $jobs[$i]['instructions'];
 
-		if(count($instructions) > 40){
+		if(strlen($instructions) > 40){
 			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, 40));
 			$results .="<td class='expandable_row'>
 				<div class='except'>".$excerpt."</div>
