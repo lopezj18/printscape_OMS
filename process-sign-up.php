@@ -47,10 +47,10 @@ $submit = filter_input(INPUT_POST, 'submit');
             }
         }
     }
-    else echo "Your passwords do not match";
+    else echo "<h1>Your passwords do not match</h1>";
 
 }
-else echo "Please fill in <b>all</b> fields!";
+else echo "<h1>Please fill in <b>all</b> fields!</h1>";
     }
    
 
