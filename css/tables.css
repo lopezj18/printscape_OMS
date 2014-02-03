@@ -48,7 +48,7 @@
   height: 90px;
   white-space: normal;
   transition: height east-out .2s; }
-  .expandable_row:hover .expandable_arrow {
+.expandable_row:hover .expandable_arrow {
     display: none; }
 
 .expandable_arrow {
@@ -60,6 +60,9 @@
 
 .full_instructions {
   display: none; }
+  
+.full_instructions:hover {
+  display: block; }
 
 /*.expandable_arrow:hover{
 	display:none;

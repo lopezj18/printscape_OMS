@@ -1,7 +1,7 @@
 <?php
 //put code from external file right here before the doctype:
 require_once("functions-lib.php");
-
+require_once("db-connect.php");
 //store in a var of the user's choice 
 $username = sanitize($_POST['username']);
 $password = sanitize($_POST['password']);
@@ -19,8 +19,7 @@ $phone_number = sanitize($_POST['phone_number']);
 $submit = filter_input(INPUT_POST, 'submit');
 
 
-   
-    if ($submit)
+ if ($submit)
     {
     //check for existence
        if($username&&$password&&$repeatpassword)
@@ -53,6 +52,8 @@ $submit = filter_input(INPUT_POST, 'submit');
 }
 else echo "Please fill in <b>all</b> fields!";
     }
+   
+
 
 
 //////////////////////start finding the new id////////////////
@@ -69,11 +70,17 @@ $new_id++;
 //print_r($_FILES);
 
 run_my_query("
-INSERT INTO jobs
-    (id, company_name, order_name, type, due_date, date_submited, file, specia1_instructions)
+INSERT INTO users
+    (id, user_name, password, first_name, last_name, email,)
 	VALUES 
-	(null, '$customer_name', '$order_name', '$type', '$due_date', '$date_submited' '$file', '$specia1_instructions');
-");
+	(null, '$user_name', '$password', '$first_name', '$last_name', '$email');
+
+INSERT INTO customer
+    (id, company_name, address_1, address_2, city, state, zip, phone_number)
+	VALUES 
+	(null, '$customer_name', '$address_1', '$address_2', '$city', '$state' '$zip', '$phone_number');
+"
+);
 
 
 header('Location:my-recent-orders.php');

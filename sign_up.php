@@ -1,5 +1,6 @@
 <?php
 require_once("header.php");
+include("process-sign-up.php");
 require_once("functions-lib.php");
 ?>
 <script src="js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>

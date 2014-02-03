@@ -41,8 +41,9 @@ function run_my_query($query){
 	if($mysqli -> connect_errno){
 		echo "connection problem on line 9:".$mysqli ->
 	connect_error;
-}	
+}
 
+//this is the function for adding new users, needs finished tutorial for checking password http://stackoverflow.com/questions/10066245/minimum-and-maximum-strength-length    function create_new_user($query){   }	
 
 
 $result = $mysqli -> query($query) or die ('problem on line 14: '.$mysqli -> error);
