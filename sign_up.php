@@ -1,6 +1,5 @@
 <?php
 require_once("header.php");
-include("process-sign-up.php");
 require_once("functions-lib.php");
 ?>
 <script src="js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
@@ -15,13 +14,13 @@ a:hover{color:white;}
 a:active{color:white;}
 </style>
 <h2><a href="login.php">Log In</a></h2>
-<form class="sign_up_form" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
+<form class="sign_up_form" action="process-sign-up.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Create your Customer Account</h1>
     <p><input type="hidden" placeholder="" name="newuser_id"></p>
-    <p><input type="text" placeholder="Username" name="username" required></p>
-    <p><input type="text" placeholder="Password" name="password" maxlength="15" required></p>
-    <p><input type="text" placeholder="Confirm Your Password" name="repeatepassword" maxlength="15" required></p>
+    <p><input type="text" placeholder="Username" name="username" maxlength="20" required></p>
+    <p><input type="password" placeholder="Password" name="password" maxlength="20" required></p>
+    <p><input type="password" placeholder="Confirm Your Password" name="repeatepassword" maxlength="20" required></p>
     <p><input type="text" placeholder="First Name" name="first_name" required></p>
     <p><input type="text" placeholder="Last Name" name="last_name" required></p>
     <p><input type="email" placeholder="Email" name="email" required></p>
