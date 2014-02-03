@@ -1,9 +1,12 @@
 <?php
 require_once("header.php");
 require_once("functions-lib.php");
-require_once("require-process.php");
 ?>
+<script src="js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+<script src="js/phonenumber-function.js" type="text/javascript"></script>
 <style type="text/css">
+h1 {margin-bottom: 0px; line-height: 28px;}
 h2{padding:10px 10px 0 0; font-size:18px; width:100%; text-align:right;}
 a:link{color:#9fa615;}
 a:visited{color:#9fa615;}
@@ -11,21 +14,20 @@ a:hover{color:white;}
 a:active{color:white;}
 </style>
 <h2><a href="login.php">Log In</a></h2>
-<form class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
+<form class="sign_up_form" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Create your Customer Account</h1>
-    <p><input type="text" placeholder="Username" name="username">
-    <span class="error">* <?php echo $usernameErr;?></span></p>
-    
-    <p><input type="text" placeholder="Password" name="password"></p>
-    <p><input type="text" placeholder="First Name" name="first_name"></p>
-    <p><input type="text" placeholder="Last Name" name="last_name"></p>
-    <p><input type="text" placeholder="Company Name" name="company_name"></p>
-    <p><input type="email" placeholder="Email" name="email"></p>
-    <p><input type="text" placeholder="Address Line 1" name="address_1"></p>
+    <p><input type="text" placeholder="Username" name="username" required></p>
+    <p><input type="text" placeholder="Password" name="password" maxlength="15" required></p>
+    <p><input type="text" placeholder="First Name" name="first_name" required></p>
+    <p><input type="text" placeholder="Last Name" name="last_name" required></p>
+    <p><input type="text" placeholder="Company Name" name="company_name" required></p>
+    <p><input type="email" placeholder="Email" name="email" required></p>
+    <p><input type="text" placeholder="Address Line 1" name="address_1" required></p>
     <p><input type="text" placeholder="Address Line 2" name="address_2"></p>
-    <p><input type="number" placeholder="City" name="city"></p>
-    <p><select name="state">
+    <p><input type="text" placeholder="City" name="city" required></p>
+    <p><select name="state" required>
+    		<option value="">Select A State</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -78,7 +80,9 @@ a:active{color:white;}
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
         </select></p>
-    <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions)" name="special_instructions"></textarea></p>
+    <p><input type="text" id="zipCode" placeholder="Zip Code (Ext. Optional)" name="zip" required></p>
+    <p><input type="tel" id="phoneExt" placeholder="Phone Number (Ext# Optional)" name="phone_number" required></p>
+   
 	<p><input type="submit" class="btn"></p>
     </div>
 </form>

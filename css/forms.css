@@ -22,6 +22,10 @@ form{
 	height: 645px;
 	margin-top: 0px;
 }
+.sign_up_form{
+	height: 890px;
+	margin-top: 0px;
+}
 form div{
 	margin:0 auto;
 	overflow:hidden;
@@ -104,5 +108,22 @@ textarea{
 	font-size:18px;
 }
 textarea:focus, textarea:focus {
+    outline-color:#717174;
+}
+select{
+    width: 297px;
+	height: 49px;
+    background:#efefef;
+    border:1px solid #dedede;
+    padding:10px;
+    margin-top:3px;
+    font-size:0.9em;
+    color:#717174;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+	font-size:18px;
+}
+select:focus, textarea:focus {
     outline-color:#717174;
 }
