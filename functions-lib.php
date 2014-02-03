@@ -82,10 +82,9 @@ function get_clients($customers){
 	return $results;
 }
 
-
 function get_order($jobs){
 	for($i=0; $i<(3); $i++){
-		
+
 		$results .="<tr><td>".$jobs[$i]['job_id']."</td>";
 		$results .="<td>".$jobs[$i]['customer_name']."</td>";
 		$results .="<td>".$jobs[$i]['order_name']."</td>";
@@ -94,14 +93,14 @@ function get_order($jobs){
 		$results .="<td>".$jobs[$i]['date_submited']->format('m-d-Y')."</td>";
 		$results .="<td>".$jobs[$i]['status']."</td>";
 		$results .="<td>".$jobs[$i]['file']."</td>";
-		
+
 		$instructions = $jobs[$i]['instructions'];
-		$max_length = 35;
+		$max_length = 30;
 		if(strlen($instructions) > $max_length){
 			echo "max length exceeded";
-			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $max_length));
+			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($instructions, 0, $max_length));
 			$results .="<td class='expandable_row'>
-				<div class='except'>".$excerpt."</div>
+				<div class='excerpt'>".$excerpt."</div>
 				<div class='full_instructions'>".$instructions."</div>
 				<img class='expandable_arrow' src='images/expandable_arrow.png' alt='hover to expand'/>
 			</td>";
