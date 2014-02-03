@@ -17,12 +17,14 @@ a:active{color:white;}
 <form class="sign_up_form" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Create your Customer Account</h1>
+    <p><input type="hidden" placeholder="" name="newuser_id"></p>
     <p><input type="text" placeholder="Username" name="username" required></p>
     <p><input type="text" placeholder="Password" name="password" maxlength="15" required></p>
+    <p><input type="text" placeholder="Confirm Your Password" name="repeatepassword" maxlength="15" required></p>
     <p><input type="text" placeholder="First Name" name="first_name" required></p>
     <p><input type="text" placeholder="Last Name" name="last_name" required></p>
-    <p><input type="text" placeholder="Company Name" name="company_name" required></p>
     <p><input type="email" placeholder="Email" name="email" required></p>
+    <p><input type="text" placeholder="Company Name" name="company_name" required></p>
     <p><input type="text" placeholder="Address Line 1" name="address_1" required></p>
     <p><input type="text" placeholder="Address Line 2" name="address_2"></p>
     <p><input type="text" placeholder="City" name="city" required></p>
@@ -80,10 +82,10 @@ a:active{color:white;}
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
         </select></p>
-    <p><input type="text" id="zipCode" placeholder="Zip Code (Ext. Optional)" name="zip" required></p>
+    <p><input type="text" id="zipCode" placeholder="Zip Code" name="zip" required></p>
     <p><input type="tel" id="phoneExt" placeholder="Phone Number (Ext# Optional)" name="phone_number" required></p>
    
-	<p><input type="submit" class="btn"></p>
+	<p><input type="submit" name="submit" class="btn"></p>
     </div>
 </form>
 
