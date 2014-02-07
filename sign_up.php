@@ -12,6 +12,8 @@ a:link{color:#9fa615;}
 a:visited{color:#9fa615;}
 a:hover{color:white;}
 a:active{color:white;}
+/*input:required, input:focus {box-shadow:none;}
+input:required input:invalid {box-shadow:0 0 3px red;}*/
 </style>
 <h2><a href="login.php">Log In</a></h2>
 <form class="sign_up_form" action="process-sign-up.php" method="POST" enctype="multipart/form-data">
@@ -84,11 +86,9 @@ a:active{color:white;}
         </select></p>
     <p><input type="text" id="zipCode" placeholder="Zip Code" name="zip" required></p>
     <p><input type="tel" id="phoneExt" placeholder="Phone Number (Ext# Optional)" name="phone_number" required></p>
+    <div id="#info"></div>
    
 	<p><input type="submit" name="submit" class="btn"></p>
     </div>
 </form>
-
-<?php
-include("footer.php");
-?>
+<?php include("footer.php"); ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 function check_login($username, $password){
 		//put code from external file right here before the doctype:
 		include("function-lib.php");
