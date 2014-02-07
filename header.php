@@ -1,3 +1,4 @@
+<?php require_once('functions-lib.php'); ?>
 <!doctype html>
 <html>
 <head>

@@ -1,10 +1,9 @@
 <?php
 require_once("functions-lib.php");
-
 if($_POST){
 	$username = sanitize($_POST['username']);
 	$password = sanitize($_POST['password']);
-	check_login($username, $password);
+	$result = check_login($username, $password);
 }
 require_once("header.php");
 ?>
@@ -17,6 +16,7 @@ require_once("header.php");
 	    <p><input type="submit"  class="btn" value="Log In"></p>
 	    <br>
     </div>
+    <div class="status"><?php echo $result ?></div>
     <p class="sign_up">Don't have an account?<a class="sign_up_link" href="sign_up.php"> Click Here To Sign Up.</a>
 </form>
 

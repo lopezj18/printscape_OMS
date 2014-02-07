@@ -1,7 +1,6 @@
 <?php
 require_once("authenticate");
 require_once("header.php");
-require_once("functions-lib.php");
 ?>
 <style type="text/css">
 h2{padding:10px 10px 0 0; font-size:18px; width:100%; text-align:right;}

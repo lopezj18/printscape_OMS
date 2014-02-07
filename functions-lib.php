@@ -27,9 +27,9 @@ function check_login($username, $password){
 		//otherwise
 		}else{
 			//send them back and trigger a message
-			
-			echo "<h1 class='invalid-user'>Incorrect User Name or Password!!</h1>";
+			$status = "<h1 class='invalid-user'>Incorrect User Name or Password!!</h1>";
 		}
+	return $status;
 }
 function run_my_query($query){
 	//run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)

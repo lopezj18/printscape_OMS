@@ -1,17 +1,5 @@
 <?php //test_functions.php
 
-function insert_user($user){
-	//Sample insert query
-	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created) 
-				VALUES ($id, $username, $password, $first_name, $last_name, $email, $role_id, $date_created)";
-
-	if(!$result = $mysqli->query($query)){
-		echo "Query Error: " . $mysqli->error;
-	} else {
-		echo "User added successfully!";
-	}
-}
-
 //id, username, password, first_name, last_name, email, role_id, date_created
 
 function insert_users($users){
@@ -214,9 +202,66 @@ function test_orders(){
 
 	$i = 0;
 
-	$orders[$i]['id'] = ;
-	$orders[$i]
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Color';
+	$orders[$i]['due_date'] = new DateTime("2015-02-05 10:10:10");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-02 11:14:15");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros. In non purus justo. Praesent accumsan, massa in volutpat congue, erat quam laoreet elit, ac tincidunt erat mauris non est. Aliquam tincidunt adipiscing erat sed commodo. Curabitur suscipit eros eros, ac feugiat erat pulvinar sit amet. Etiam id quam sagittis, vehicula nisi non, blandit urna. Nunc pulvinar urna a tincidunt dictum. Curabitur id sodales tortor. Aenean euismod diam ac leo aliquam, ac accumsan eros euismod. Nulla nisl ligula, laoreet sed egestas at, facilisis vel tortor.';
 
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Black and White';
+	$orders[$i]['due_date'] = new DateTime("2014-01-03 10:00:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-01 08:00:00");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros. In non purus justo. Praesent accumsan, massa in volutpat congue, erat quam laoreet elit, ac tincidunt erat mauris non est. Aliquam tincidunt adipiscing erat sed commodo. Curabitur suscipit eros eros, ac feugiat erat pulvinar sit amet. Etiam id quam sagittis, vehicula nisi non, blandit urna. Nunc pulvinar urna a tincidunt dictum. Curabitur id sodales tortor. Aenean euismod diam ac leo aliquam, ac accumsan eros euismod.';
+
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Color';
+	$orders[$i]['due_date'] = new DateTime("2014-01-09 17:00:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-05 03:57:23");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros.';
+
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Color';
+	$orders[$i]['due_date'] = new DateTime("2014-01-10 04:30:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-10 04:30:00");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros. In non purus justo. Praesent accumsan, massa in volutpat congue, erat quam laoreet elit, ac tincidunt erat mauris non est. Aliquam tincidunt adipiscing erat sed commodo. Curabitur suscipit eros eros, ac feugiat erat pulvinar sit amet. Etiam id quam sagittis, vehicula nisi non, blandit urna. Nunc pulvinar urna a tincidunt dictum. Curabitur id sodales tortor. Aenean euismod diam ac leo aliquam, ac accumsan eros euismod. Nulla nisl ligula, laoreet sed egestas at, facilisis vel tortor.';
+
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Color';
+	$orders[$i]['due_date'] = new DateTime("2013-12-25 00:00:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-01 00:00:00");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros. In non purus justo. Praesent accumsan, massa in volutpat congue, erat quam laoreet elit, ac tincidunt erat mauris non est. Aliquam tincidunt adipiscing erat sed commodo. Curabitur suscipit eros eros, ac feugiat erat pulvinar sit amet. Etiam id quam sagittis, vehicula nisi non, blandit urna. Nunc pulvinar urna a tincidunt dictum. Curabitur id sodales tortor.';
+
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Black and White';
+	$orders[$i]['due_date'] = new DateTime("2014-03-20 04:30:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-03-21 04:30:00");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nibh purus, vulputate nec rhoncus mattis, consequat non eros. In non purus justo. Praesent accumsan, massa in volutpat congue, erat quam laoreet elit, ac tincidunt erat mauris non est. Aliquam tincidunt adipiscing erat sed commodo. Curabitur suscipit eros eros, ac feugiat erat pulvinar sit amet. Etiam id quam sagittis, vehicula nisi non, blandit urna. Nunc pulvinar urna a tincidunt dictum. Curabitur id sodales tortor. Aenean euismod diam ac leo aliquam, ac accumsan eros euismod. Nulla nisl ligula, laoreet sed egestas at, facilisis vel tortor.';
+
+	$i++;
+
+	$orders[$i]['id'] = $i;
+	$orders[$i]['type'] = 'Color';
+	$orders[$i]['due_date'] = new DateTime("2014-01-10 04:30:00");
+	$orders[$i]['date_submitted'] = new DateTime("2014-01-10 04:30:00");
+	$orders[$i]['status_id'] = 0;
+	$orders[$i]['instructions'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 }
 
 function get_users($users, $page_number){

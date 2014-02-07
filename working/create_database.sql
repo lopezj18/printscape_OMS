@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `roles` (
 	`id` int(4) NOT NULL AUTO_INCREMENT,
-	`name` varchar(20) NOT NULL,
+	`name` enum(20) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 CREATE TABLE IF NOT EXISTS `status` (
 	`id` int(4) NOT NULL AUTO_INCREMENT,
-	`name` varchar(20) NOT NULL,
+	`name` enum(20) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
