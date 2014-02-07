@@ -27,7 +27,7 @@ function check_login($username, $password){
 		//otherwise
 		}else{
 			//send them back and trigger a message
-			$status = "<h1 class='invalid-user'>Incorrect User Name or Password!!</h1>";
+			$status = "Incorrect User Name or Password!!";
 		}
 	return $status;
 }

@@ -8,7 +8,9 @@ h1{
 	margin-bottom:20px;
 	margin-top:20px;
 }
-
+input:invalid {
+    -moz-box-shadow: none;
+}
 form{
 	height: 300px;
 	background-color: rgb(193, 215, 46);

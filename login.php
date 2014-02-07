@@ -7,7 +7,7 @@ if($_POST){
 }
 require_once("header.php");
 ?>
-
+<h1 class="status invalid-user"><?php echo $result ?></h1>
 <form action="login.php" method="POST" >
 	<div>
 	    <h1>Login</h1>
@@ -16,7 +16,7 @@ require_once("header.php");
 	    <p><input type="submit"  class="btn" value="Log In"></p>
 	    <br>
     </div>
-    <div class="status"><?php echo $result ?></div>
+    
     <p class="sign_up">Don't have an account?<a class="sign_up_link" href="sign_up.php"> Click Here To Sign Up.</a>
 </form>
 
