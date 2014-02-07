@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD
-require_once("authenticate");
-=======
 require_once("authenticate.php");
 require_once("functions-lib.php");
->>>>>>> da3156d2854b3df32944df226e48d2beec34c3b1
 require_once("header.php");
 ?>
 <style type="text/css">
