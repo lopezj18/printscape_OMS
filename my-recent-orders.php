@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once("header.php");
-require_once("functions-lib.php");
 require_once("authenticate.php");
+require_once("functions-lib.php");
+require_once("header.php");
 ?>
 
 <style type="text/css">
