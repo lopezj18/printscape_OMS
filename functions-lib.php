@@ -132,4 +132,27 @@ function insert_user($user){
 	}
 }
 
+function insert_customers($customers){
+	//Sample insert query
+	$query = "INSERT INTO users (id, userid, company, address, city, state, zip, phone) 
+				VALUES ($id, $userid, $company, $address, $city, $state, $zip, $phone)";
+
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "User added successfully!";
+	}
+}
+
+function insert_orders($orders){
+	//Sample insert query
+	$query = "INSERT INTO users (id, type, due_date, date_submitted, statusid, instructions) 
+				VALUES ($id, $type, $due_date, $date_submitted, $statusid, $instructions)";
+
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "Your order was added successfully!";
+	}
+}
 ?>
