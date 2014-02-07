@@ -36,7 +36,8 @@
   max-height: 20px;
   white-space: nowrap;
   overflow: hidden;
-  transition: height ease-in .2s; }
+  transition: height ease-in .2s;
+  padding-right: 25px; }
 
 /*.tftable td:hover{
 	height:inherit;
@@ -50,13 +51,16 @@
   transition: height east-out .2s; }
 .expandable_row:hover .expandable_arrow {
     display: none; }
+  .expandable_row:hover .full_instructions {
+    display: inline-block; }
 
 .expandable_arrow {
   float: right;
   position: relative;
   top: -26px;
-  right: -8px;
-  display: inline; }
+  right: -25px;
+  display: inline;
+  width: 20px; }
 
 .full_instructions {
   display: none; }

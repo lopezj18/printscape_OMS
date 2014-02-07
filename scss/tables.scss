@@ -42,6 +42,7 @@
 	white-space:nowrap;
 	overflow: hidden;
 	transition:height ease-in .2s;
+	padding-right:25px;
 }
 
 /*.tftable td:hover{
@@ -51,20 +52,24 @@
 }*/
 /* TODO: Install SASS */
 .expandable_row:hover{
-	.expandable_arrow{
-		display: none;
-	}
 	height:90px;
 	white-space: normal;
 	transition:height east-out .2s;
+	.expandable_arrow{
+		display: none;
+	}
+	.full_instructions{
+		display: inline-block;
+	}
 }
 
 .expandable_arrow{
 	float: right;
 	position: relative;
 	top: -26px;
-	right: -8px;
+	right: -25px;
 	display: inline;
+	width:20px;
 }
 
 .full_instructions{
