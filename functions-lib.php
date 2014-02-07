@@ -119,5 +119,17 @@ function sanitize($variable){
 	return $variable;
 }
 
+//NEW FUCNTION
+function insert_user($user){
+	//Sample insert query
+	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created) 
+				VALUES ($id, $username, $password, $first_name, $last_name, $email, $role_id, $date_created)";
+
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "User added successfully!";
+	}
+}
 
 ?>

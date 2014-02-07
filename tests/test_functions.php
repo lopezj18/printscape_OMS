@@ -1,5 +1,19 @@
 <?php //test_functions.php
 
+function insert_user($user){
+	//Sample insert query
+	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created) 
+				VALUES ($id, $username, $password, $first_name, $last_name, $email, $role_id, $date_created)";
+
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "User added successfully!";
+	}
+}
+
+//id, username, password, first_name, last_name, email, role_id, date_created
+
 function insert_users($users){
 	include("db_info.php");
 	
@@ -195,7 +209,13 @@ function test_status(){
 }
 
 function test_orders(){
-	
+
+	$orders = array();
+
+	$i = 0;
+
+	$orders[$i]['id'] = ;
+	$orders[$i]
 
 }
 
