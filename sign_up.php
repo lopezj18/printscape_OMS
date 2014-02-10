@@ -22,7 +22,6 @@ input:required input:invalid {box-shadow:0 0 3px red;}*/
     <p><input type="hidden" placeholder="" name="newuser_id"></p>
     <p><input type="text" placeholder="Username" name="username" maxlength="20" required></p>
     <p><input type="password" placeholder="Password" name="password" maxlength="20" required></p>
-    <p><input type="password" placeholder="Confirm Your Password" name="repeatepassword" maxlength="20" required></p>
     <p><input type="text" placeholder="First Name" name="first_name" required></p>
     <p><input type="text" placeholder="Last Name" name="last_name" required></p>
     <p><input type="email" placeholder="Email" name="email" required></p>

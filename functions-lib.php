@@ -131,6 +131,7 @@ function insert_user($user){
 	$role_id		= $user['role_id'];
 	$date_created 	= $user['date_created'];
 
+
 	//Get info to connect to the database
 	require('db_info.php');
 
@@ -143,12 +144,16 @@ function insert_user($user){
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
-		echo "Query Error: " . $mysqli->error ."<br/>";
+		$message['error'] = 1;
+		$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
 	} else {
-		echo "User added successfully! <br/>";
+		$message['error'] = 0;
+		$message['status'] = "User added successfully! <br/>";
 	}
 
 	mysqli_close($mysqli);
+return $message;
+
 }
 
 function insert_customer($customer){
