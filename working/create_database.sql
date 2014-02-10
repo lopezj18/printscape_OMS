@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`password` varchar(20) NOT NULL,
 	`first_name` varchar(20) NOT NULL,
 	`last_name` varchar(20) NOT NULL,
-	`email` varchar(50) NOT NULL,
+	`email` varchar(255) NOT NULL,
 	`role_id` int(4) NOT NULL,
 	`date_created` datetime NOT NULL,
 	PRIMARY KEY (`id`)

@@ -18,8 +18,8 @@ require_once("header.php");
 <tr><th>Id#</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
 
 <?php
-	$jobs = jobs();
-	echo get_order($jobs);
+	/*$jobs = jobs();
+	echo get_order($jobs);*/
 ?>
 
 </table>

@@ -1,16 +1,27 @@
 <?php //test_functions.php
 function check_login($username, $password){
+
+		require_once('db_info.php');
+
+		//figure this shit out...
+		$mysqli = new mysqli($hname, $uname, $pass, $db);
+
 		//call the run_my_query()function from that include
-		$result = run_my_query("SELECT * FROM users 
+		$query = "SELECT * FROM users 
 			WHERE username='$username'
 			AND password='$password'
-			");
+			";
 		
+		//Execute query
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		}
+
 		//if it selected a row they typed the correct username and password
 		//if ($theirname =='boss')&&($theirpass=='boss')){
 		
 		//get the pointer to point at the first row retried by the select
-		$result -> data_seek(0);
+		//$result -> data_seek(0);
 		
 		if($row = $result -> fetch_assoc()){
 		
@@ -31,6 +42,7 @@ function check_login($username, $password){
 		}
 	return $status;
 }
+
 function run_my_query($query){
 	//run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)
 	require_once('db_info.php');
@@ -39,21 +51,9 @@ function run_my_query($query){
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 	//for troubleshooting, this willmake a custom message apear if line 3 had a problem
 	if($mysqli -> connect_errno){
-		echo "connection problem on line 9:".$mysqli ->
-	connect_error;
+		echo "connection problem on line 9:".$mysqli->connect_error;
+	}
 }
-
-//this is the function for adding new users, needs finished tutorial for checking password http://stackoverflow.com/questions/10066245/minimum-and-maximum-strength-length    function create_new_user($query){   }	
-
-
-$result = $mysqli -> query($query) or die ('problem on line 14: '.$mysqli -> error);
-//close connection
-mysqli_close($mysqli);
-//send the retrieved info back ti where the function was called
-return $result;
-
-}//closes the funtion on line 4
-include('test_functions.php');
 
 function get_userinfo($users){
 	for($i=0; $i<(4); $i++){
@@ -122,7 +122,7 @@ function sanitize($variable){
 function insert_user($user){
 
 	//Set up our vars for the query
-	$id 			= $user['id'];
+	$id 		 	= $user['id'];
 	$username		= $user['username'];
 	$password 		= $user['password'];
 	$first_name 	= $user['first_name'];
@@ -132,21 +132,23 @@ function insert_user($user){
 	$date_created 	= $user['date_created'];
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert user query
-	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created) 
-				VALUES ($id, $username, $password, $first_name, $last_name, $email, $role_id, $date_created)";
+	$query = "INSERT INTO users(id, username, password, first_name, last_name, email, role_id, date_created) 
+				VALUES('', '$username', '$password', '$first_name', '$last_name', '$email', '$role_id', '$date_created')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
-		echo "Query Error: " . $mysqli->error;
+		echo "Query Error: " . $mysqli->error ."<br/>";
 	} else {
-		echo "User added successfully!";
+		echo "User added successfully! <br/>";
 	}
+
+	mysqli_close($mysqli);
 }
 
 function insert_customer($customer){
@@ -162,14 +164,14 @@ function insert_customer($customer){
 	$phone 		= $customer['phone'];
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert customer query
 	$query = "INSERT INTO customers (id, user_id, company, address, city, state, zip, phone) 
-				VALUES ($id, $user_id, $company, $address, $city, $state, $zip, $phone)";
+				VALUES ('', '$user_id', '$company', '$address', '$city', '$state', '$zip', '$phone')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
@@ -190,14 +192,14 @@ function insert_order($order){
 	$instructions 	= $order['instructions'];
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert order query
 	$query = "INSERT INTO orders (id, type_id, due_date, date_submitted, status_id, instructions) 
-				VALUES ($id, $type_id, $due_date, $date_submitted, $status_id, $instructions)";
+				VALUES ('', '$type_id', '$due_date', '$date_submitted', '$status_id', '$instructions')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
@@ -215,14 +217,14 @@ function insert_file($file){
 	$filename 	= $file['filename'];
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert file query
 	$query = "INSERT INTO files (id, order_id, filename)
-			VALUES($id, $order_id, $filename)";
+			VALUES('', '$order_id', '$filename')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
@@ -247,18 +249,18 @@ function insert_roles(){
 	$roles[$i]['id']	= $i;
 	$roles[$i]['name']	= 'Customer';
 
-	$i++
+	$i++;
 
 	$roles[$i]['id']	= $i;
 	$roles[$i]['name']	= 'Order Manager';
 
-	$i++
+	$i++;
 
 	$roles[$i]['id']	= $i;
 	$roles[$i]['name']	= 'Administrator';
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
@@ -268,8 +270,8 @@ function insert_roles(){
 		$id 	= $roles[$j]['id']; 
 		$name 	= $roles[$j]['name'];
 
-		$query = "INSERT INTO types (id, name)
-				VALUES($id, $name)";
+		$query = "INSERT INTO roles (id, name)
+				VALUES('$id', '$name')";
 
 		if(!$result = $mysqli->query($query)){
 			echo "Query Error: " . $mysqli->error;
@@ -319,7 +321,7 @@ function insert_types(){
 	$types[$i]['name']	= 'Web Related';
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
@@ -330,7 +332,7 @@ function insert_types(){
 		$name 	= $types[$j]['name'];
 
 		$query = "INSERT INTO types (id, name)
-				VALUES($id, $name)";
+				VALUES('', '$name')";
 
 		if(!$result = $mysqli->query($query)){
 			echo "Query Error: " . $mysqli->error;
@@ -359,17 +361,12 @@ function insert_statuses(){
 	$i++;
 
 	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'In Pre-Flight';
+	$statuses[$i]['name']	= 'Printing';
 
 	$i++;
 
 	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'In Production';
-
-	$i++;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'In Finishing';
+	$statuses[$i]['name']	= 'Packaging';
 
 	$i++;
 
@@ -377,7 +374,7 @@ function insert_statuses(){
 	$statuses[$i]['name']	= 'Shipped';
 
 	//Get info to connect to the database
-	require_once('db_info.php');
+	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
@@ -387,8 +384,8 @@ function insert_statuses(){
 		$id 	= $statuses[$j]['id']; 
 		$name 	= $statuses[$j]['name'];
 
-		$query = "INSERT INTO types (id, name)
-				VALUES($id, $name)";
+		$query = "INSERT INTO statuses (id, name)
+				VALUES('', '$name')";
 
 		if(!$result = $mysqli->query($query)){
 			echo "Query Error: " . $mysqli->error;
