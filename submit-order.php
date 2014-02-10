@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("authenticate.php");
 require_once("header.php");
 ?>
@@ -22,7 +23,7 @@ a:active{color:white;}
     <p><input type="date" placeholder="Todays Date" name="date_submited"></p>
     <p><input type="file" placeholder="Upload File" name="file"></p>
     <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions)" name="special_instructions"></textarea></p>
-	<p><input type="submit" class="btn"></p>
+	<p><input type="submit" class="btn" value="Submit"></p>
     </div>
 </form>
 
