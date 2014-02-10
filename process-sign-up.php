@@ -11,13 +11,15 @@ $user['last_name'] = sanitize($_POST['last_name']);
 $user['email'] = sanitize($_POST['email']);
 $user['date_created'] = date ("m-d-Y H:i:s");
 
-$customers['company_name'] = sanitize($_POST['company_name']);
-$customers['address_1'] = sanitize($_POST['address_1']);
-$customers['address_2'] = sanitize($_POST['address_2']);
-$customers['city'] = sanitize($_POST['city']);
-$customers['state'] = sanitize($_POST['state']);
-$customers['zip'] = sanitize($_POST['zip']);
-$customers['phone_number'] = sanitize($_POST['phone_number']);
+$customer['user_id'] = 148;
+$customer['company'] = sanitize($_POST['company_name']);
+$finaladdress = sanitize($_POST['address_1']);
+$finaladdress .= ' '.sanitize($_POST['address_2']);
+$customer['address'] = $finaladdress;
+$customer['city'] = sanitize($_POST['city']);
+$customer['state'] = sanitize($_POST['state']);
+$customer['zip'] = sanitize($_POST['zip']);
+$customer['phone_number'] = sanitize($_POST['phone_number']);
 
 
 $message = insert_user($user);
