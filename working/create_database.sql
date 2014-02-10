@@ -7,21 +7,19 @@ SET time_zone = "+00:00";
 
 -- ------------------------------------
 
-
 --
 -- Drop tables in order to avoid Foreign Key errors
 --
-DROP TABLE IF EXISTS `user_role` CASCADE;
-DROP TABLE IF EXISTS `user_order` CASCADE;
 
-DROP TABLE IF EXISTS `file` CASCADE;
-DROP TABLE IF EXISTS `order` CASCADE;
-DROP TABLE IF EXISTS `status` CASCADE;
-
-DROP TABLE IF EXISTS `role` CASCADE;
-DROP TABLE IF EXISTS `customer` CASCADE;
-
-DROP TABLE IF EXISTS `user` CASCADE;
+DROP TABLE IF EXISTS `customers` CASCADE;
+DROP TABLE IF EXISTS `user_roles` CASCADE;
+DROP TABLE IF EXISTS `user_orders` CASCADE;
+DROP TABLE IF EXISTS `files` CASCADE;
+DROP TABLE IF EXISTS `statuses` CASCADE;
+DROP TABLE IF EXISTS `orders` CASCADE;
+DROP TABLE IF EXISTS `types` CASCADE;
+DROP TABLE IF EXISTS `roles` CASCADE;
+DROP TABLE IF EXISTS `users` CASCADE;
 
 
 --
@@ -46,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `roles` (
 	`id` int(4) NOT NULL AUTO_INCREMENT,
-	`name` enum(20) NOT NULL,
+	`name` varchar(20) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -83,12 +81,22 @@ CREATE TABLE IF NOT EXISTS `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Table structure for table `status`
+-- Table structure for table `types`
 --
 
-CREATE TABLE IF NOT EXISTS `status` (
+CREATE TABLE IF NOT EXISTS `types` (
 	`id` int(4) NOT NULL AUTO_INCREMENT,
-	`name` enum(20) NOT NULL,
+	`name` varchar(20) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `statuses`
+--
+
+CREATE TABLE IF NOT EXISTS `statuses` (
+	`id` int(4) NOT NULL AUTO_INCREMENT,
+	`name` varchar(20) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -98,15 +106,17 @@ CREATE TABLE IF NOT EXISTS `status` (
 
 CREATE TABLE IF NOT EXISTS `orders` (
 	`id` bigint(8) NOT NULL AUTO_INCREMENT,
-	`type` varchar(10) NOT NULL,
+	`type_id` int(4) NOT NULL,
 	`due_date` datetime NOT NULL,
 	`date_submitted` datetime NOT NULL,
 	`status_id` int(4) NOT NULL,
 	`instructions` varchar(500) NOT NULL,
 	PRIMARY KEY (`id`),
-	KEY `fk_order_status` (`status_id`),
-	KEY `idx_orders` (`type`, `due_date`, `date_submitted`, `status_id`),
-	CONSTRAINT `fk_order_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+	KEY `fk_orders_types` (`type_id`),
+	KEY `fk_orders_statuses` (`status_id`),
+	KEY `idx_orders` (`due_date`, `date_submitted`),
+	CONSTRAINT `fk_order_types` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `fk_order_statuses` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --

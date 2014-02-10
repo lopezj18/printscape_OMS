@@ -27,7 +27,7 @@ function check_login($username, $password){
 		//otherwise
 		}else{
 			//send them back and trigger a message
-			$status = "Incorrect User Name or Password!!";
+			$status = "<div class='invalid-user'>Incorrect User Name or Password!!</div>";
 		}
 	return $status;
 }
@@ -119,12 +119,29 @@ function sanitize($variable){
 	return $variable;
 }
 
-//NEW FUCNTION
 function insert_user($user){
-	//Sample insert query
+
+	//Set up our vars for the query
+	$id 			= $user['id'];
+	$username		= $user['username'];
+	$password 		= $user['password'];
+	$first_name 	= $user['first_name'];
+	$last_name		= $user['last_name'];
+	$email			= $user['email'];
+	$role_id		= $user['role_id'];
+	$date_created 	= $user['date_created'];
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert user query
 	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created) 
 				VALUES ($id, $username, $password, $first_name, $last_name, $email, $role_id, $date_created)";
 
+	//Execute query
 	if(!$result = $mysqli->query($query)){
 		echo "Query Error: " . $mysqli->error;
 	} else {
@@ -132,27 +149,264 @@ function insert_user($user){
 	}
 }
 
-function insert_customers($customers){
-	//Sample insert query
-	$query = "INSERT INTO users (id, userid, company, address, city, state, zip, phone) 
-				VALUES ($id, $userid, $company, $address, $city, $state, $zip, $phone)";
+function insert_customer($customer){
 
+	//Set up our vars for the query
+	$id 		= $customer['id'];
+	$user_id 	= $customer['user_id'];
+	$company 	= $customer['company'];
+	$address 	= $customer['address'];
+	$city 		= $customer['city'];
+	$state		= $customer['state'];
+	$zip		= $customer['zip'];
+	$phone 		= $customer['phone'];
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert customer query
+	$query = "INSERT INTO customers (id, user_id, company, address, city, state, zip, phone) 
+				VALUES ($id, $user_id, $company, $address, $city, $state, $zip, $phone)";
+
+	//Execute query
 	if(!$result = $mysqli->query($query)){
 		echo "Query Error: " . $mysqli->error;
 	} else {
-		echo "User added successfully!";
+		echo "Customer added successfully!";
 	}
 }
 
-function insert_orders($orders){
-	//Sample insert query
-	$query = "INSERT INTO users (id, type, due_date, date_submitted, statusid, instructions) 
-				VALUES ($id, $type, $due_date, $date_submitted, $statusid, $instructions)";
+function insert_order($order){
 
+	//Set up our vars for the query
+	$id 			= $order['id'];
+	$type_id 		= $order['type_id'];
+	$due_date 		= $order['due_date'];
+	$date_submitted	= $order['date_submitted'];
+	$status_id		= $order['status_id'];
+	$instructions 	= $order['instructions'];
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert order query
+	$query = "INSERT INTO orders (id, type_id, due_date, date_submitted, status_id, instructions) 
+				VALUES ($id, $type_id, $due_date, $date_submitted, $status_id, $instructions)";
+
+	//Execute query
 	if(!$result = $mysqli->query($query)){
 		echo "Query Error: " . $mysqli->error;
 	} else {
 		echo "Your order was added successfully!";
 	}
 }
+
+function insert_file($file){
+
+	//Set up our vars for the query
+	$id 		= $file['id'];
+	$order_id 	= $file['order_id'];
+	$filename 	= $file['filename'];
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert file query
+	$query = "INSERT INTO files (id, order_id, filename)
+			VALUES($id, $order_id, $filename)";
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "Your order was added successfully!";
+	}
+}
+
+/* BEGIN STATIC DATA FUNCTIONS */
+
+function insert_roles(){
+	$roles = array();
+
+	$i=0;
+
+	$roles[$i]['id']	= $i;
+	$roles[$i]['name']	= 'Nothing';
+
+	$i++;
+
+	$roles[$i]['id']	= $i;
+	$roles[$i]['name']	= 'Customer';
+
+	$i++
+
+	$roles[$i]['id']	= $i;
+	$roles[$i]['name']	= 'Order Manager';
+
+	$i++
+
+	$roles[$i]['id']	= $i;
+	$roles[$i]['name']	= 'Administrator';
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Setup loop to insert each type
+	for($j = 0; $j < count($roles); $j++){
+		$id 	= $roles[$j]['id']; 
+		$name 	= $roles[$j]['name'];
+
+		$query = "INSERT INTO types (id, name)
+				VALUES($id, $name)";
+
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		} else {
+			echo "Your order was added successfully!";
+		}
+	}
+
+	//Close db connection
+	mysqli_close($mysqli);
+}
+
+function insert_types(){
+
+	//Set up the types array with whatever types we want to offer
+
+	$types = array();
+
+	$i=0;
+
+	$types[$i]['id'] 	= $i;
+	$types[$i]['name']	= 'Color';
+
+	$i++;
+
+	$types[$i]['id'] 	= $i;
+	$types[$i]['name']	= 'Black and White';
+
+	$i++;
+
+	$types[$i]['id'] 	= $i;
+	$types[$i]['name']	= 'Wraps and Vinyl';
+
+	$i++;
+
+	$types[$i]['id']	= $i;
+	$types[$i]['name']	= 'Multi-layered';
+
+	$i++;
+
+	$types[$i]['id'] 	= $i;
+	$types[$i]['name']	= 'ADA Signage';
+
+	$i++;
+
+	$types[$i]['id'] 	= $i;
+	$types[$i]['name']	= 'Web Related';
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Setup loop to insert each type
+	for($j = 0; $j < count($types); $j++){
+		$id 	= $types[$j]['id']; 
+		$name 	= $types[$j]['name'];
+
+		$query = "INSERT INTO types (id, name)
+				VALUES($id, $name)";
+
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		} else {
+			echo "Your order was added successfully!";
+		}
+	}
+
+	//Close db connection
+	mysqli_close($mysqli);
+}
+
+function insert_statuses(){
+	$statuses = array();
+
+	$i=0;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'Pending';
+
+	$i++;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'Received';
+
+	$i++;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'In Pre-Flight';
+
+	$i++;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'In Production';
+
+	$i++;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'In Finishing';
+
+	$i++;
+
+	$statuses[$i]['id']		= $i;
+	$statuses[$i]['name']	= 'Shipped';
+
+	//Get info to connect to the database
+	require_once('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Setup loop to insert each type
+	for($j = 0; $j < count($statuses); $j++){
+		$id 	= $statuses[$j]['id']; 
+		$name 	= $statuses[$j]['name'];
+
+		$query = "INSERT INTO types (id, name)
+				VALUES($id, $name)";
+
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		} else {
+			echo "Your order was added successfully!";
+		}
+	}
+
+	//Close db connection
+	mysqli_close($mysqli);
+}
+
+function insert_static_data(){
+	insert_roles();
+	insert_types();
+	insert_statuses();
+}
+
+/* END STATIC DATA FUNCTIONS */
+
 ?>

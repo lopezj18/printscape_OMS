@@ -3,11 +3,11 @@ require_once("functions-lib.php");
 if($_POST){
 	$username = sanitize($_POST['username']);
 	$password = sanitize($_POST['password']);
-	$result = check_login($username, $password);
+	$status = check_login($username, $password);
 }
 require_once("header.php");
 ?>
-<h1 class="status invalid-user"><?php echo $result ?></h1>
+<h1 class="status"><?php echo $status ?></h1>
 <form action="login.php" method="POST" >
 	<div>
 	    <h1>Login</h1>
