@@ -11,11 +11,11 @@ $user['last_name'] = sanitize($_POST['last_name']);
 $user['email'] = sanitize($_POST['email']);
 $user['date_created'] = date ("m-d-Y H:i:s");
 
-$customer['user_id'] = 148;
+$customer = array();
+$customer['user_id'] = '';
 $customer['company'] = sanitize($_POST['company_name']);
-$finaladdress = sanitize($_POST['address_1']);
-$finaladdress .= ' '.sanitize($_POST['address_2']);
-$customer['address'] = $finaladdress;
+$customer['address1'] = sanitize($_POST['address_1']);
+$customer['address2'] = sanitize($_POST['address_2']);
 $customer['city'] = sanitize($_POST['city']);
 $customer['state'] = sanitize($_POST['state']);
 $customer['zip'] = sanitize($_POST['zip']);
