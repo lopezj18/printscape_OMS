@@ -49,14 +49,14 @@ function check_login($username, $password){
 	return $status;
 }
 
-function get_userinfo($users){
-	for($i=0; $i<(4); $i++){
-		$results .="<tr><td>".$users[$i]['user_id']."</td>";
+function build_users_table($users){
+	for($i=0; $i<count($users); $i++){
+		$results .="<tr><td>".$users[$i]['id']."</td>";
 		$results .="<td>".$users[$i]['username']."</td>";
 		$results .="<td>".$users[$i]['first_name']."</td>";
 		$results .="<td>".$users[$i]['last_name']."</td>";
 		$results .="<td>".$users[$i]['email']."</td>";
-		$results .="<td>".$users[$i]['date_created']->format('m-d-Y')."</td></tr>";
+		$results .="<td>".date ('m-d-Y', strtotime($users[$i]['date_created']))."</td></tr>";
 	}
 	return $results;
 }
@@ -93,14 +93,14 @@ function build_customers_table($customers){
 //}
 
 function build_orders_table($orders){
-	for($i=0; $i<(20); $i++){
+	for($i=0; $i<count($orders); $i++){
 
 		$results .="<tr><td>".$orders[$i]['id']."</td>";
 		$results .="<td>".$orders[$i]['customer_name']."</td>";
 		$results .="<td>".$orders[$i]['company']."</td>";
 		$results .="<td>".$orders[$i]['type_id']."</td>";
-		$results .="<td>".$orders[$i]['due_date']."</td>";
-		$results .="<td>".$orders[$i]['date_submitted']."</td>";
+		$results .="<td>".date ('m-d-Y', strtotime($orders[$i]['due_date']))."</td>";
+		$results .="<td>".date ('m-d-Y', strtotime($orders[$i]['date_submited']))."</td>";
 		$results .="<td>".$orders[$i]['status']."</td>";
 		$results .="<td>".$orders[$i]['file']."</td>";
 
@@ -212,7 +212,40 @@ function retrieve_customers(){
 }
 
 
+function retrieve_users(){
+	require('db_info.php');
 
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert customer query
+	$query = "SELECT users.id as id,
+					users.username as username,
+					users.first_name as first_name,
+					users.last_name as last_name,
+					users.email as email,
+					users.date_created as date_created
+			FROM users";
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	}
+
+	$users = array();
+	$i=0;
+	while($row = $result->fetch_assoc()){
+		$users[$i]['id']		 	.= $row['id'];
+		$users[$i]['username']		.= $row['username'];
+		$users[$i]['first_name'] 	.= $row['first_name'];
+		$users[$i]['last_name'] 	.= $row['last_name'];
+		$users[$i]['email'] 		.= $row['email'];
+		$users[$i]['date_created']	.= $row['date_created'];
+		$i++;
+	}
+
+	return $users;
+}
 
 function retirve_order_types(){
 	require_once('db_info.php');

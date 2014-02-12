@@ -20,8 +20,8 @@ a:active{color:white;}
 <tr><th>User Id</th><th>Company</th><th>Address 1</th><th>Address 2</th><th>City</th><th>State</th><th>Zip</th><th>Phone Number</th><th>Date Created</th></tr>
 
 <?php
-	$customers = customers();
-	echo get_clients($customers);
+	$customers = retrieve_customers();
+	echo build_customers_table($customers);
 ?>
 
 

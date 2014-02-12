@@ -12,7 +12,7 @@ $user['email'] = sanitize($_POST['email']);
 $user['date_created'] = date ("m-d-Y H:i:s");
 
 $customer = array();
-$customer['user_id'] = '1';
+$customer['user_id'] = '2';
 $customer['company'] = sanitize($_POST['company_name']);
 $customer['address1'] = sanitize($_POST['address_1']);
 $customer['address2'] = sanitize($_POST['address_2']);
