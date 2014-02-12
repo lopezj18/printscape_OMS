@@ -2,21 +2,15 @@
 	
 	require_once('tests/test_functions.php');
 	require_once('functions-lib.php');
-	//$test_users = test_users();
-	//$test_customers = test_customers();
-	$test_orders = test_orders();
-
-	//foreach($test_users as $t_user) insert_user($t_user);
-	//foreach($test_customers as $t_customer) insert_customer($t_customer);
-
-
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
-	foreach($test_orders as $t_order) insert_order($t_order);
+	$admins = create_admins();
+	//$customers = create_customers();
+	//$orders = create_orders();
+	//$user_orders = create_user_orders();
+	
+	foreach($admins as $t) insert_user($t);
+	//foreach($customers as $t) insert_user($t); insert_customer($t);
+	//foreach($orders as $t) insert_order($t);
+	//foreach($user_orders as $t) insert_user_order($t);
 
 	//insert_roles();
 	//insert_static_data();

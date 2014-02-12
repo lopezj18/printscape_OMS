@@ -1,4 +1,11 @@
-<?php //test_functions.php
+<?php //functions-lib.php
+
+function sanitize($variable){
+	if(get_magic_quotes_gpc()) $variable = stripslashes($variable);
+	$variable = htmlspecialchars($variable);
+	return $variable;
+}
+
 function check_login($username, $password){
 
 		require_once('db_info.php');
@@ -83,22 +90,21 @@ function get_clients($customers){
 	return $results;
 }
 
-function get_order($jobs){
-	for($i=0; $i<(3); $i++){
+function build_orders_table($orders){
+	for($i=0; $i<(20); $i++){
 
-		$results .="<tr><td>".$jobs[$i]['job_id']."</td>";
-		$results .="<td>".$jobs[$i]['customer_name']."</td>";
-		$results .="<td>".$jobs[$i]['order_name']."</td>";
-		$results .="<td>".$jobs[$i]['type']."</td>";
-		$results .="<td>".$jobs[$i]['due_date']->format('m-d-Y')."</td>";
-		$results .="<td>".$jobs[$i]['date_submited']->format('m-d-Y')."</td>";
-		$results .="<td>".$jobs[$i]['status']."</td>";
-		$results .="<td>".$jobs[$i]['file']."</td>";
+		$results .="<tr><td>".$orders[$i]['id']."</td>";
+		$results .="<td>".$orders[$i]['customer_name']."</td>";
+		$results .="<td>".$orders[$i]['company']."</td>";
+		$results .="<td>".$orders[$i]['type_id']."</td>";
+		$results .="<td>".$orders[$i]['due_date']."</td>";
+		$results .="<td>".$orders[$i]['date_submitted']."</td>";
+		$results .="<td>".$orders[$i]['status']."</td>";
+		$results .="<td>".$orders[$i]['file']."</td>";
 
-		$instructions = $jobs[$i]['instructions'];
+		$instructions = $orders[$i]['instructions'];
 		$max_length = 30;
 		if(strlen($instructions) > $max_length){
-			echo "max length exceeded";
 			$excerpt = preg_replace('/\s+?(\S+)?$/', '', substr($instructions, 0, $max_length));
 			$results .="<td class='expandable_row'>
 				<div class='excerpt'>".$excerpt."</div>
@@ -106,17 +112,60 @@ function get_order($jobs){
 				<img class='expandable_arrow' src='images/expandable_arrow.png' alt='hover to expand'/>
 			</td>";
 		}
-		else $results .="<td>".$jobs[$i]['instructions']."</td>";
+		else $results .="<td>".$orders[$i]['instructions']."</td>";
 
-		$results .="<td>".$jobs[$i]['delete']."</td></tr>";
+		$results .="<td>".$orders[$i]['delete']."</td></tr>";
 	}
 	return $results;
 }
 
-function sanitize($variable){
-	if(get_magic_quotes_gpc()) $variable = stripslashes($variable);
-	$variable = htmlspecialchars($variable);
-	return $variable;
+function retrieve_orders(){
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert customer query
+	$query = "SELECT orders.id as orderId,
+					orders.due_date as dueDate,
+					orders.date_submitted as dateSubmitted,
+					orders.instructions as instructions,
+					types.name as typeName,
+					statuses.name as statusName,
+					users.first_name as firstName,
+					users.last_name as lastName,
+					customers.company as company
+			FROM user_orders
+			JOIN orders ON orders.id=user_orders.order_id
+			JOIN types ON types.id=orders.type_id
+			JOIN statuses ON statuses.id=orders.status_id
+			JOIN users ON users.id=user_orders.user_id
+			JOIN customers ON customers.user_id=users.id";	
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	}
+
+	$orders = array();
+	$i=0;
+	while($row = $result->fetch_assoc()){
+		$orders[$i]['id']		 		.= $row['orderId'];
+		$orders[$i]['customer_name']	.= $row['firstName']." ".$row['lastName'];
+		$orders[$i]['company']			.= $row['company'];
+		$orders[$i]['type_id'] 			.= $row['typeName'];
+		$orders[$i]['due_date'] 		.= $row['dueDate'];
+		$orders[$i]['date_submitted'] 	.= $row['dateSubmitted'];
+		$orders[$i]['status']			.= $row['statusName'];
+		$orders[$i]['instructions'] 	.= $row['instructions'];
+		$i++;
+
+		print_r($row); echo "<br/><br/>";
+	}
+
+	return $orders;
+
+
 }
 
 function insert_user($user){
@@ -211,6 +260,30 @@ function insert_order($order){
 		echo "Query Error: " . $mysqli->error;
 	} else {
 		echo "Your order was added successfully!";
+	}
+}
+
+function insert_user_order($user_order){
+
+	//Set up our vars for the query
+	$user_id 		= $user_order['user_id'];
+	$order_id 		= $user_order['order_id'];
+
+	//Get info to connect to the database
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert order query
+	$query = "INSERT INTO user_orders (user_id, order_id) 
+				VALUES ('$user_id', '$order_id')";
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error."<br/>";
+	} else {
+		echo "User order added successfully!<br/>";
 	}
 }
 

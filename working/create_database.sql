@@ -62,18 +62,19 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE IF NOT EXISTS `customers` (
 	`id` int(4) NOT NULL AUTO_INCREMENT,
 	`user_id` int(4) NOT NULL,
 	`company` varchar(50) NOT NULL,
-	`address` varchar(50) NOT NULL,
+	`phone` varchar(20) NOT NULL,
+	`address1` varchar(50) NOT NULL,
+	`address2` varchar(50) NULL,
 	`city` varchar(20) NOT NULL,
 	`state` char(2) NOT NULL,
 	`zip` int(4) NOT NULL,
-	`phone` int(4) NOT NULL,
 	PRIMARY KEY (`id`),
 	KEY `fk_customers_users` (`user_id`),
 	KEY `idx_customers` (`company`),
