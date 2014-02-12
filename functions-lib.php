@@ -50,18 +50,6 @@ function check_login($username, $password){
 	return $status;
 }
 
-function run_my_query($query){
-	//run a query to retrive all row (record) data from our table SELECT *. We'll store that in a var (array)
-	require_once('db_info.php');
-
-	//figure this shit out...
-	$mysqli = new mysqli($hname, $uname, $pass, $db);
-	//for troubleshooting, this willmake a custom message apear if line 3 had a problem
-	if($mysqli -> connect_errno){
-		echo "connection problem on line 9:".$mysqli->connect_error;
-	}
-}
-
 function get_userinfo($users){
 	for($i=0; $i<(4); $i++){
 		$results .="<tr><td>".$users[$i]['user_id']."</td>";
@@ -211,7 +199,8 @@ function insert_customer($customer){
 	$id 		= $customer['id'];
 	$user_id 	= $customer['user_id'];
 	$company 	= $customer['company'];
-	$address 	= $customer['address'];
+	$address1 	= $customer['address1'];
+	$address2 	= $customer['address2'];
 	$city 		= $customer['city'];
 	$state		= $customer['state'];
 	$zip		= $customer['zip'];
@@ -224,8 +213,8 @@ function insert_customer($customer){
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert customer query
-	$query = "INSERT INTO customers (id, user_id, company, address, city, state, zip, phone) 
-				VALUES ('', '$user_id', '$company', '$address', '$city', '$state', '$zip', '$phone')";
+	$query = "INSERT INTO customers (id, user_id, company, address1, address2, city, state, zip, phone) 
+				VALUES ('', '$user_id', '$company', '$address1', '$address2' '$city', '$state', '$zip', '$phone')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
