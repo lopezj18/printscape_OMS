@@ -196,7 +196,7 @@ return $message;
 function insert_customer($customer){
 
 	//Set up our vars for the query
-	$id 		= $customer['id'];
+	//$id 		= $customer['id'];
 	$user_id 	= $customer['user_id'];
 	$company 	= $customer['company'];
 	$address1 	= $customer['address1'];
@@ -214,7 +214,7 @@ function insert_customer($customer){
 
 	//Prepare insert customer query
 	$query = "INSERT INTO customers (id, user_id, company, address1, address2, city, state, zip, phone) 
-				VALUES ('', '$user_id', '$company', '$address1', '$address2' '$city', '$state', '$zip', '$phone')";
+				VALUES ('', '$user_id', '$company', '$address1', '$address2', '$city', '$state', '$zip', '$phone')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
