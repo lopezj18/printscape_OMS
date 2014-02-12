@@ -8,19 +8,21 @@ require_once("functions-lib.php");
 
 
 
+
 $order = array();
-	$order = sanitize($_POST['customer_name']);
-	$order = sanitize($_POST['order_name']);
-	$order = sanitize($_POST[1]);
-	$order = sanitize($_POST['due_date']);
-	$order = sanitize($_POST['date_submitted']);
-	$order = sanitize($_POST['file']);
-	$order = sanitize($_POST['special_instructions']);
+$order['type_id'] = sanitize($_POST['type']);
+$order['last_name'] = sanitize($_POST['due_date']);
+$order['date_submitted'] = date ("m-d-Y H:i:s");
+$order['instructions'] = sanitize($_POST['special_instructions']);
+
+$message = insert_order($order);
+print_r($message);
+
+//header('Location:my-recent-orders.php');
+ 
 
 
 
-insert_order($order);
 
 
-header('Location:my-recent-orders.php');
 ?>

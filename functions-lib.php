@@ -1,5 +1,4 @@
 <?php //functions-lib.php
-
 function sanitize($variable){
 	if(get_magic_quotes_gpc()) $variable = stripslashes($variable);
 	$variable = htmlspecialchars($variable);
@@ -62,21 +61,36 @@ function get_userinfo($users){
 	return $results;
 }
 
-function get_clients($customers){
+function build_customers_table($customers){
 
-	for($i=0; $i<(2); $i++){
-		$results .="<tr><td>".$customers[$i]['user_id']."</td>";
-		$results .="<td>".$customers[$i]['company_name']."</td>";
-		$results .="<td>".$customers[$i]['address_1']."</td>";
-		$results .="<td>".$customers[$i]['address_2']."</td>";
+	for($i=0; $i<count($customers); $i++){
+		$results .="<tr><td>".$customers[$i]['id']."</td>";
+		$results .="<td>".$customers[$i]['company']."</td>";
+		$results .="<td>".$customers[$i]['address1']."</td>";
+		$results .="<td>".$customers[$i]['address2']."</td>";
 		$results .="<td>".$customers[$i]['city']."</td>";
 		$results .="<td>".$customers[$i]['state']."</td>";
 		$results .="<td>".$customers[$i]['zip']."</td>";
-		$results .="<td>".$customers[$i]['phone_number']."</td>";
-		$results .="<td>".$customers[$i]['date_created']->format('m-d-Y')."</td></tr>";
+		$results .="<td>".$customers[$i]['phone']."</td>";
+		$results .="<td>".date ('m-d-Y', strtotime($customers[$i]['date_created']))."</td></tr>";
 	}
 	return $results;
 }
+
+//function build_customers_table($customers){
+//	for($i=0; $i<(20); $i++){
+//
+//		$results .="<tr><td>".$orders[$i]['id']."</td>";
+//		$results .="<td>".$orders[$i]['company']."</td>";
+//		$results .="<td>".$orders[$i]['address_1']."</td>";
+//		$results .="<td>".$orders[$i]['address_2']."</td>";
+//		$results .="<td>".$orders[$i]['city']."</td>";
+//		$results .="<td>".$orders[$i]['state']."</td>";
+//		$results .="<td>".$orders[$i]['zip']."</td>";
+//		$results .="<td>".$orders[$i]['phone_number']."</td>";
+//
+//	return $results;
+//}
 
 function build_orders_table($orders){
 	for($i=0; $i<(20); $i++){
@@ -147,14 +161,92 @@ function retrieve_orders(){
 		$orders[$i]['status']			.= $row['statusName'];
 		$orders[$i]['instructions'] 	.= $row['instructions'];
 		$i++;
-
-		print_r($row); echo "<br/><br/>";
 	}
 
 	return $orders;
 
 
 }
+
+
+function retrieve_customers(){
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert customer query
+	$query = "SELECT customers.id as id,
+					customers.company as company,
+					customers.address1 as address1,
+					customers.address2 as address2,
+					customers.city as city,
+					customers.state as state,
+					customers.zip as zip,
+					customers.phone as phone,
+					users.date_created as date_created
+			FROM customers
+			JOIN users ON users.id=customers.user_id";
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	}
+
+	$customers = array();
+	$i=0;
+	while($row = $result->fetch_assoc()){
+		$customers[$i]['id']		 	.= $row['id'];
+		$customers[$i]['company']		.= $row['company'];
+		$customers[$i]['address1'] 		.= $row['address1'];
+		$customers[$i]['address2'] 		.= $row['address2'];
+		$customers[$i]['city'] 			.= $row['city'];
+		$customers[$i]['state']		 	.= $row['state'];
+		$customers[$i]['zip']			.= $row['zip'];
+		$customers[$i]['phone']			.= $row['phone'];
+		$customers[$i]['date_created'] 	.= $row['date_created'];
+		$i++;
+	}
+
+	return $customers;
+}
+
+
+
+
+function retirve_order_types(){
+	require_once('db_info.php');
+
+		//figure this shit out...
+		$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+		//call the run_my_query()function from that include
+		$query = "SELECT * FROM types";
+		
+		//Execute query
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		}
+		$types = array();
+		$i = 0;
+		while($row = $result -> fetch_assoc()){
+			$types[$i]['id'] .= $row['id'];
+			$types[$i]['name'] .= $row['name'];
+		$i++;
+		}
+	return $types;
+}
+
+function build_type_options($types){
+	for($i=0; $i<count($types); $i++){
+
+		$results .="<option value=".$types[$i]['id'].">".$types[$i]['name']."</option>";
+	}
+			
+	return $results;
+}
+
+
 
 function insert_user($user){
 
@@ -231,9 +323,11 @@ function insert_order($order){
 	$type_id 		= $order['type_id'];
 	$due_date 		= $order['due_date'];
 	$date_submitted	= $order['date_submitted'];
-	$status_id		= $order['status_id'];
+	$status_id		=  1;
 	$instructions 	= $order['instructions'];
+echo $type_id;
 
+print_r ($order);
 	//Get info to connect to the database
 	require('db_info.php');
 
@@ -244,13 +338,26 @@ function insert_order($order){
 	$query = "INSERT INTO orders (id, type_id, due_date, date_submitted, status_id, instructions) 
 				VALUES ('', '$type_id', '$due_date', '$date_submitted', '$status_id', '$instructions')";
 
-	//Execute query
+
 	if(!$result = $mysqli->query($query)){
-		echo "Query Error: " . $mysqli->error;
+		$message['error'] = 1;
+		$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
 	} else {
-		echo "Your order was added successfully!";
+		$message['error'] = 0;
+		$message['status'] = "order added successfully! <br/>";
 	}
+
+	mysqli_close($mysqli);
+return $message;
+
 }
+	//Execute query
+	//if(!$result = $mysqli->query($query)){
+	//	echo "Query Error: " . $mysqli->error;
+	//} else {
+	//	echo "Your order was added successfully!";
+	//}
+//}
 
 function insert_user_order($user_order){
 
@@ -301,176 +408,176 @@ function insert_file($file){
 	}
 }
 
-/* BEGIN STATIC DATA FUNCTIONS */
-
-function insert_roles(){
-	$roles = array();
-
-	$i=0;
-
-	$roles[$i]['id']	= $i;
-	$roles[$i]['name']	= 'Nothing';
-
-	$i++;
-
-	$roles[$i]['id']	= $i;
-	$roles[$i]['name']	= 'Customer';
-
-	$i++;
-
-	$roles[$i]['id']	= $i;
-	$roles[$i]['name']	= 'Order Manager';
-
-	$i++;
-
-	$roles[$i]['id']	= $i;
-	$roles[$i]['name']	= 'Administrator';
-
-	//Get info to connect to the database
-	require('db_info.php');
-
-	//Create db connection
-	$mysqli = new mysqli($hname, $uname, $pass, $db);
-
-	//Setup loop to insert each type
-	for($j = 0; $j < count($roles); $j++){
-		$id 	= $roles[$j]['id']; 
-		$name 	= $roles[$j]['name'];
-
-		$query = "INSERT INTO roles (id, name)
-				VALUES('$id', '$name')";
-
-		if(!$result = $mysqli->query($query)){
-			echo "Query Error: " . $mysqli->error;
-		} else {
-			echo "Your order was added successfully!";
-		}
-	}
-
-	//Close db connection
-	mysqli_close($mysqli);
-}
-
-function insert_types(){
-
-	//Set up the types array with whatever types we want to offer
-
-	$types = array();
-
-	$i=0;
-
-	$types[$i]['id'] 	= $i;
-	$types[$i]['name']	= 'Color';
-
-	$i++;
-
-	$types[$i]['id'] 	= $i;
-	$types[$i]['name']	= 'Black and White';
-
-	$i++;
-
-	$types[$i]['id'] 	= $i;
-	$types[$i]['name']	= 'Wraps and Vinyl';
-
-	$i++;
-
-	$types[$i]['id']	= $i;
-	$types[$i]['name']	= 'Multi-layered';
-
-	$i++;
-
-	$types[$i]['id'] 	= $i;
-	$types[$i]['name']	= 'ADA Signage';
-
-	$i++;
-
-	$types[$i]['id'] 	= $i;
-	$types[$i]['name']	= 'Web Related';
-
-	//Get info to connect to the database
-	require('db_info.php');
-
-	//Create db connection
-	$mysqli = new mysqli($hname, $uname, $pass, $db);
-
-	//Setup loop to insert each type
-	for($j = 0; $j < count($types); $j++){
-		$id 	= $types[$j]['id']; 
-		$name 	= $types[$j]['name'];
-
-		$query = "INSERT INTO types (id, name)
-				VALUES('', '$name')";
-
-		if(!$result = $mysqli->query($query)){
-			echo "Query Error: " . $mysqli->error;
-		} else {
-			echo "Your order was added successfully!";
-		}
-	}
-
-	//Close db connection
-	mysqli_close($mysqli);
-}
-
-function insert_statuses(){
-	$statuses = array();
-
-	$i=0;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'Pending';
-
-	$i++;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'Received';
-
-	$i++;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'Printing';
-
-	$i++;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'Packaging';
-
-	$i++;
-
-	$statuses[$i]['id']		= $i;
-	$statuses[$i]['name']	= 'Shipped';
-
-	//Get info to connect to the database
-	require('db_info.php');
-
-	//Create db connection
-	$mysqli = new mysqli($hname, $uname, $pass, $db);
-
-	//Setup loop to insert each type
-	for($j = 0; $j < count($statuses); $j++){
-		$id 	= $statuses[$j]['id']; 
-		$name 	= $statuses[$j]['name'];
-
-		$query = "INSERT INTO statuses (id, name)
-				VALUES('', '$name')";
-
-		if(!$result = $mysqli->query($query)){
-			echo "Query Error: " . $mysqli->error;
-		} else {
-			echo "Your order was added successfully!";
-		}
-	}
-
-	//Close db connection
-	mysqli_close($mysqli);
-}
-
-function insert_static_data(){
-	insert_roles();
-	insert_types();
-	insert_statuses();
-}
-
-/* END STATIC DATA FUNCTIONS */
+///* BEGIN STATIC DATA FUNCTIONS */
+//
+//function insert_roles(){
+//	$roles = array();
+//
+//	$i=0;
+//
+//	$roles[$i]['id']	= $i;
+//	$roles[$i]['name']	= 'Nothing';
+//
+//	$i++;
+//
+//	$roles[$i]['id']	= $i;
+//	$roles[$i]['name']	= 'Customer';
+//
+//	$i++;
+//
+//	$roles[$i]['id']	= $i;
+//	$roles[$i]['name']	= 'Order Manager';
+//
+//	$i++;
+//
+//	$roles[$i]['id']	= $i;
+//	$roles[$i]['name']	= 'Administrator';
+//
+//	//Get info to connect to the database
+//	require('db_info.php');
+//
+//	//Create db connection
+//	$mysqli = new mysqli($hname, $uname, $pass, $db);
+//
+//	//Setup loop to insert each type
+//	for($j = 0; $j < count($roles); $j++){
+//		$id 	= $roles[$j]['id']; 
+//		$name 	= $roles[$j]['name'];
+//
+//		$query = "INSERT INTO roles (id, name)
+//				VALUES('$id', '$name')";
+//
+//		if(!$result = $mysqli->query($query)){
+//			echo "Query Error: " . $mysqli->error;
+//		} else {
+//			echo "Your order was added successfully!";
+//		}
+//	}
+//
+//	//Close db connection
+//	mysqli_close($mysqli);
+//}
+//
+//function insert_types(){
+//
+//	//Set up the types array with whatever types we want to offer
+//
+//	$types = array();
+//
+//	$i=0;
+//
+//	$types[$i]['id'] 	= $i;
+//	$types[$i]['name']	= 'Color';
+//
+//	$i++;
+//
+//	$types[$i]['id'] 	= $i;
+//	$types[$i]['name']	= 'Black and White';
+//
+//	$i++;
+//
+//	$types[$i]['id'] 	= $i;
+//	$types[$i]['name']	= 'Wraps and Vinyl';
+//
+//	$i++;
+//
+//	$types[$i]['id']	= $i;
+//	$types[$i]['name']	= 'Multi-layered';
+//
+//	$i++;
+//
+//	$types[$i]['id'] 	= $i;
+//	$types[$i]['name']	= 'ADA Signage';
+//
+//	$i++;
+//
+//	$types[$i]['id'] 	= $i;
+//	$types[$i]['name']	= 'Web Related';
+//
+//	//Get info to connect to the database
+//	require('db_info.php');
+//
+//	//Create db connection
+//	$mysqli = new mysqli($hname, $uname, $pass, $db);
+//
+//	//Setup loop to insert each type
+//	for($j = 0; $j < count($types); $j++){
+//		$id 	= $types[$j]['id']; 
+//		$name 	= $types[$j]['name'];
+//
+//		$query = "INSERT INTO types (id, name)
+//				VALUES('', '$name')";
+//
+//		if(!$result = $mysqli->query($query)){
+//			echo "Query Error: " . $mysqli->error;
+//		} else {
+//			echo "Your order was added successfully!";
+//		}
+//	}
+//
+//	//Close db connection
+//	mysqli_close($mysqli);
+//}
+//
+//function insert_statuses(){
+//	$statuses = array();
+//
+//	$i=0;
+//
+//	$statuses[$i]['id']		= $i;
+//	$statuses[$i]['name']	= 'Pending';
+//
+//	$i++;
+//
+//	$statuses[$i]['id']		= $i;
+//	$statuses[$i]['name']	= 'Received';
+//
+//	$i++;
+//
+//	$statuses[$i]['id']		= $i;
+//	$statuses[$i]['name']	= 'Printing';
+//
+//	$i++;
+//
+//	$statuses[$i]['id']		= $i;
+//	$statuses[$i]['name']	= 'Packaging';
+//
+//	$i++;
+//
+//	$statuses[$i]['id']		= $i;
+//	$statuses[$i]['name']	= 'Shipped';
+//
+//	//Get info to connect to the database
+//	require('db_info.php');
+//
+//	//Create db connection
+//	$mysqli = new mysqli($hname, $uname, $pass, $db);
+//
+//	//Setup loop to insert each type
+//	for($j = 0; $j < count($statuses); $j++){
+//		$id 	= $statuses[$j]['id']; 
+//		$name 	= $statuses[$j]['name'];
+//
+//		$query = "INSERT INTO statuses (id, name)
+//				VALUES('', '$name')";
+//
+//		if(!$result = $mysqli->query($query)){
+//			echo "Query Error: " . $mysqli->error;
+//		} else {
+//			echo "Your order was added successfully!";
+//		}
+//	}
+//
+//	//Close db connection
+//	mysqli_close($mysqli);
+//}
+//
+//function insert_static_data(){
+//	insert_roles();
+//	insert_types();
+//	insert_statuses();
+//}
+//
+///* END STATIC DATA FUNCTIONS */
 
 ?>

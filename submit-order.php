@@ -16,11 +16,14 @@ a:active{color:white;}
 <form class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Submit An Order</h1>
-    <p><input type="text" placeholder="Customer Name" name="customer_name"></p>
-    <p><input type="text" placeholder="Order Name" name="order_name"></p>
-    <p><input type="text" placeholder="Type of Order" name="type"></p>
-    <p><input type="date" placeholder="Due Date" name="due_date"></p>
-    <p><input type="date" placeholder="Todays Date" name="date_submited"></p>
+    <p><select name="type" required>
+			<?php $types = retirve_order_types();
+						echo build_type_options($types);?>
+       
+            
+    </select></p>
+    <p><input type="date" placeholder="Due Date mm/dd/yyyy" name="due_date"></p>
+    <p><input type="date" placeholder="Todays Date mm/dd/yyyy" name="date_submited"></p>
     <p><input type="file" placeholder="Upload File" name="file"></p>
     <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions)" name="special_instructions"></textarea></p>
 	<p><input type="submit" class="btn" value="Submit"></p>
@@ -29,4 +32,4 @@ a:active{color:white;}
 
 <?php
 include("footer.php");
-?>
+?> 
