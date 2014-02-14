@@ -166,23 +166,6 @@ function create_customers(){
 
 	$i++;
 
-	$customers[$i]['username'] = '';
-	$customers[$i]['password'] = '123';
-	$customers[$i]['first_name'] = '';
-	$customers[$i]['last_name'] = '';
-	$customers[$i]['email'] = '';
-	$customers[$i]['phone'] = '';
-	$customers[$i]['role_id'] = '1';
-	$customers[$i]['date_created'] = date('m-d-Y H:i:s');
-	$customers[$i]['company'] = '';
-	$customers[$i]['address1'] = '';
-	$customers[$i]['address2'] = '';
-	$customers[$i]['city'] = '';
-	$customers[$i]['state'] = '';
-	$customers[$i]['zip'] = '';
-
-	$i++;
-
 	$customers[$i]['username'] = 'jimbles';
 	$customers[$i]['password'] = 'jimbly9000';
 	$customers[$i]['first_name'] = 'Jimbles';
@@ -625,7 +608,7 @@ function create_orders(){
 function create_user_orders(){
 	$user_orders = array();
 
-	for($i=0; $i<22; $i++){
+	for($i=1; $i<23; $i++){
 		$user_orders[$i]['user_id'] = $i+1;
 		$user_orders[$i]['order_id'] = $i;
 	}

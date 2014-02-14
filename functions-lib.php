@@ -12,6 +12,7 @@ function check_login($username, $password){
 		//figure this shit out...
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
+<<<<<<< HEAD
 
 
 		//call the run_my_query()function from that include
@@ -24,6 +25,16 @@ function check_login($username, $password){
 			WHERE username='$username'
 			AND password='$password'
 			";
+=======
+		$query = "SELECT users.id as id,
+					users.username as username,
+					users.first_name as first_name,
+					user_roles.role_id as role_id
+				FROM users
+					LEFT JOIN user_roles ON user_roles.user_id=users.id
+				WHERE username='$username'
+				AND password='$password'";
+>>>>>>> 2d7c2327cf43e68594a9f80ccdc6d93738301c3a
 		
 		//Execute query
 		if(!$result = $mysqli->query($query)){
@@ -164,34 +175,37 @@ function retrieve_orders(){
 					users.last_name as lastName,
 					customers.company as company
 			FROM user_orders
-			JOIN orders ON orders.id=user_orders.order_id
-			JOIN types ON types.id=orders.type_id
-			JOIN statuses ON statuses.id=orders.status_id
-			JOIN users ON users.id=user_orders.user_id
-			JOIN customers ON customers.user_id=users.id";	
+				LEFT JOIN orders ON orders.id=user_orders.order_id
+				LEFT JOIN types ON types.id=orders.type_id
+				LEFT JOIN statuses ON statuses.id=orders.status_id
+				LEFT JOIN users ON users.id=user_orders.user_id
+				LEFT JOIN customers ON customers.user_id=users.id";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
-		echo "Query Error: " . $mysqli->error;
+		$message['error'] = 1;
+		$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
+		echo $message;
+		return $message;
 	}
+	else {
+		$message['error'] = 0;
 
-	$orders = array();
-	$i=0;
-	while($row = $result->fetch_assoc()){
-		$orders[$i]['id']		 		.= $row['orderId'];
-		$orders[$i]['customer_name']	.= $row['firstName']." ".$row['lastName'];
-		$orders[$i]['company']			.= $row['company'];
-		$orders[$i]['type_id'] 			.= $row['typeName'];
-		$orders[$i]['due_date'] 		.= $row['dueDate'];
-		$orders[$i]['date_submitted'] 	.= $row['dateSubmitted'];
-		$orders[$i]['status']			.= $row['statusName'];
-		$orders[$i]['instructions'] 	.= $row['instructions'];
-		$i++;
+		$orders = array();
+		$i=0;
+		while($row = $result->fetch_assoc()){
+			$orders[$i]['id']		 		.= $row['orderId'];
+			$orders[$i]['customer_name']	.= $row['firstName']." ".$row['lastName'];
+			$orders[$i]['company']			.= $row['company'];
+			$orders[$i]['type_id'] 			.= $row['typeName'];
+			$orders[$i]['due_date'] 		.= $row['dueDate'];
+			$orders[$i]['date_submitted'] 	.= $row['dateSubmitted'];
+			$orders[$i]['status']			.= $row['statusName'];
+			$orders[$i]['instructions'] 	.= $row['instructions'];
+			$i++;
+		}
 	}
-
 	return $orders;
-
-
 }
 
 
@@ -385,7 +399,7 @@ function insert_customer($customer){
 		$user_id = $mysqli->insert_id;
 	}
 
-	if($message['error'] = 0){
+	if($message['error'] == 0){
 		//Prepare insert customer query
 		$query = "INSERT INTO customers (id, user_id, company, address1, address2, city, state, zip, phone) 
 					VALUES ('', '$user_id', '$company', '$address1', '$address2', '$city', '$state', '$zip', '$phone')";
@@ -393,12 +407,13 @@ function insert_customer($customer){
 		//Execute query
 		if(!$result = $mysqli->query($query)){
 			$message['error'] = 1;
-			$message['status'] .= "Query Error: " . $mysqli->error;
+			$message['status'] = "Query Error: " . $mysqli->error;
 		} else {
 			$message['error'] = 0;
 			$message['status'] .= "Customer successfully added<br/>";
 		}
 	}
+	return $message;
 }
 
 function insert_order($order){
@@ -407,7 +422,7 @@ function insert_order($order){
 	$id 			= $order['id'];
 	$type_id 		= $order['type_id'];
 	$due_date 		= $order['due_date'];
-	$date_submitted	= $order['date_submitted'];
+	$date_submitted	= date('m-d-Y H-i-m');
 	$status_id		=  1;
 	$instructions 	= $order['instructions'];
 echo $type_id;
@@ -429,7 +444,7 @@ print_r ($order);
 		$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
 	} else {
 		$message['error'] = 0;
-		$message['status'] = "order added successfully! <br/>";
+		$message['status'] = "Order added successfully! <br/>";
 	}
 
 	mysqli_close($mysqli);
@@ -464,7 +479,7 @@ function insert_user_order($user_order){
 	if(!$result = $mysqli->query($query)){
 		echo "Query Error: " . $mysqli->error."<br/>";
 	} else {
-		echo "User order added successfully!<br/>";
+		echo "Order linked to user account<br/>";
 	}
 }
 
