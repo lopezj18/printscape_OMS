@@ -12,37 +12,14 @@ function check_login($username, $password){
 		//figure this shit out...
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
-
-
-"SELECT orders.id as orderId,
-					orders.due_date as dueDate,
-					orders.date_submitted as dateSubmitted,
-					orders.instructions as instructions,
-					types.name as typeName,
-					statuses.name as statusName,
-					users.first_name as firstName,
-					users.last_name as lastName,
-					customers.company as company
-			FROM user_orders
-			JOIN orders ON orders.id=user_orders.order_id
-			JOIN types ON types.id=orders.type_id
-			JOIN statuses ON statuses.id=orders.status_id
-			JOIN users ON users.id=user_orders.user_id
-			JOIN customers ON customers.user_id=users.id";	
-
-
-
-
-		//call the run_my_query()function from that include
-		$query = "SELECT users.id as user_id,
-						users.username as username,
-						users.first_name as first_name, 
-						user_roles.role_id as role_id,
-		FROM user_roles
-		JOIN users ON users.id=user_roles.user_id
-			WHERE username='$username'
-			AND password='$password'
-			";
+		$query = "SELECT users.id as id,
+					users.username as username,
+					users.first_name as first_name,
+					user_roles.role_id as role_id
+				FROM users
+					LEFT JOIN user_roles ON user_roles.user_id=users.id
+				WHERE username='$username'
+				AND password='$password'";
 		
 		//Execute query
 		if(!$result = $mysqli->query($query)){
@@ -167,11 +144,11 @@ function retrieve_orders(){
 					users.last_name as lastName,
 					customers.company as company
 			FROM user_orders
-			JOIN orders ON orders.id=user_orders.order_id
-			JOIN types ON types.id=orders.type_id
-			JOIN statuses ON statuses.id=orders.status_id
-			JOIN users ON users.id=user_orders.user_id
-			JOIN customers ON customers.user_id=users.id";
+				LEFT JOIN orders ON orders.id=user_orders.order_id
+				LEFT JOIN types ON types.id=orders.type_id
+				LEFT JOIN statuses ON statuses.id=orders.status_id
+				LEFT JOIN users ON users.id=user_orders.user_id
+				LEFT JOIN customers ON customers.user_id=users.id";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
