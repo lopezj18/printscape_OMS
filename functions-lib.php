@@ -50,7 +50,6 @@ function check_login($username, $password){
 	return $status;
 }
 
-
 function check_customer_role($customer_role){
 	if($customer_role == 1){
 		return true;
