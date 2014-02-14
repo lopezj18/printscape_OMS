@@ -7,23 +7,25 @@
 	//insert_roles();
 	//insert_static_data();
 
+	echo date('m-d-Y H-i-s');
+
 	if($_POST['create']){
 		switch($_POST['create']){
 			case 1:
 				$admins = create_admins();
-				foreach ($admins as $t) print_r(insert_user($t));
+				foreach ($admins as $t){ print_r(insert_user($t)); sleep(1);}
 				break;
 			case 2:
 				$customers = create_customers();
-				foreach($customers as $t) print_r(insert_customer($t));
+				foreach($customers as $t){ print_r(insert_customer($t)); sleep(1);}
 				break;
 			case 3:
 				$orders = create_orders();
-				foreach($orders as $t) print_r(insert_order($t));
+				foreach($orders as $t){ print_r(insert_order($t)); sleep(1);}
 				break;
 			case 4:
 				$user_orders = create_user_orders();
-				foreach($user_orders as $t) print_r(insert_user_order($t));
+				foreach($user_orders as $t){ print_r(insert_user_order($t)); sleep(1);}
 				break;
 		}	
 	}
@@ -34,9 +36,12 @@
 				print_r(truncate_table('users'));
 				break;
 			case 2:
-				print_r(truncate_table('orders'));
+				print_r(truncate_table('customers'));
 				break;
 			case 3:
+				print_r(truncate_table('orders'));
+				break;
+			case 4:
 				print_r(truncate_table('user_orders'));
 				break;
 		}	
@@ -77,8 +82,9 @@
 	</form>
 	<form action="run-tests.php" method="POST">
 		<button type="submit" name="truncate" value="1">Truncate Users</button>
-		<button type="submit" name="truncate" value="2">Truncate Orders</button>
-		<button type="submit" name="truncate" value="3">Truncate User Orders</button>
+		<button type="submit" name="truncate" value="2">Truncate Customers</button>
+		<button type="submit" name="truncate" value="3">Truncate Orders</button>
+		<button type="submit" name="truncate" value="4">Truncate User Orders</button>
 	</form>
 </body>
 </html>
