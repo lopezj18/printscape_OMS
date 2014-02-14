@@ -12,8 +12,34 @@ function check_login($username, $password){
 		//figure this shit out...
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
+
+
+"SELECT orders.id as orderId,
+					orders.due_date as dueDate,
+					orders.date_submitted as dateSubmitted,
+					orders.instructions as instructions,
+					types.name as typeName,
+					statuses.name as statusName,
+					users.first_name as firstName,
+					users.last_name as lastName,
+					customers.company as company
+			FROM user_orders
+			JOIN orders ON orders.id=user_orders.order_id
+			JOIN types ON types.id=orders.type_id
+			JOIN statuses ON statuses.id=orders.status_id
+			JOIN users ON users.id=user_orders.user_id
+			JOIN customers ON customers.user_id=users.id";	
+
+
+
+
 		//call the run_my_query()function from that include
-		$query = "SELECT * FROM users 
+		$query = "SELECT users.id as user_id,
+						users.username as username,
+						users.first_name as first_name, 
+						user_roles.role_id as role_id,
+		FROM user_roles
+		JOIN users ON users.id=user_roles.user_id
 			WHERE username='$username'
 			AND password='$password'
 			";
@@ -39,6 +65,9 @@ function check_login($username, $password){
 			//store the user's name in a session var
 			$_SESSION['username'] = $row['username'];
 			$_SESSION['logged_in'] = true;
+			$_SESSION['first_name'] = $row['first_name'];
+			$_SESSION['role_id'] = $row['role_id'];
+			$_SESSION['user_id'] = $row['user_id'];
 			//redirect them to view home page
 		header('Location:admin-recent-orders.php');
 		//otherwise

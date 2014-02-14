@@ -4,6 +4,7 @@ if($_POST){
 	$username = sanitize($_POST['username']);
 	$password = sanitize($_POST['password']);
 	$status = check_login($username, $password);
+print_r ($_SESSION);
 }
 require_once("header.php");
 ?>

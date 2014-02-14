@@ -3,13 +3,7 @@ session_start();
 require_once("authenticate.php");
 require_once("header.php");
 ?>
-<style type="text/css">
-h2{padding:10px 10px 0 0; font-size:18px; width:100%; text-align:right;}
-a:link{color:#9fa615;}
-a:visited{color:#9fa615;}
-a:hover{color:white;}
-a:active{color:white;}
-</style>
+
 <?php require_once('customer-nav.php'); ?>
 
 <form class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
