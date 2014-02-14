@@ -10,13 +10,13 @@ a:visited{color:#9fa615;}
 a:hover{color:white;}
 a:active{color:white;}
 </style>
-<h2><a href="submit-order.php">Submit An Order</a></h2>
-<h2><a href="my-recent-orders.php">My Recent Orders</a></h2>
-<h2><a href="logout.php">Log Out</a></h2>
+<?php require_once('customer-nav.php'); ?>
+
 <form class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Submit An Order</h1>
     <p><select name="type" required>
+    <option value="">Pick an Order Type</option>
 			<?php $types = retirve_order_types();
 						echo build_type_options($types);?>
        

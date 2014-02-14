@@ -13,6 +13,7 @@ require_once("header.php");
 	a:active{color:white;}
 </style>
 <?php require_once('nav.php'); ?>
+
 <h1 class="h1_titles">Recent Orders</h1>
 <table class="tftable" border="1">
 <tr><th>Order #</th><th>Customer Name</th><th>Company</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
