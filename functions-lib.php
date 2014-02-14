@@ -308,13 +308,14 @@ function build_type_options($types){
 function insert_user($user){
 
 	//Set up our vars for the query
+	$id 		 	= $user['id'];
 	$username		= $user['username'];
 	$password 		= $user['password'];
 	$first_name 	= $user['first_name'];
 	$last_name		= $user['last_name'];
 	$email			= $user['email'];
 	$role_id		= $user['role_id'];
-	$date_created 	= date("m-d-Y H:i:s");
+	$date_created 	= $user['date_created'];
 
 
 	//Get info to connect to the database
@@ -353,7 +354,7 @@ function insert_user($user){
 	}
 
 	mysqli_close($mysqli);
-return $user_id;
+return $message;
 
 }
 
@@ -361,12 +362,13 @@ function insert_customer($customer){
 	$customer_role_id = 2;
 
 	//Set up our vars for the query
-	$user['username']		= $customer['username'];
-	$user['password'] 		= $customer['password'];
-	$user['first_name'] 	= $customer['first_name'];
-	$user['last_name']		= $customer['last_name'];
-	$user['email']			= $customer['email'];
-	$user['role_id']		= $customer_rold_id;
+	$username		= $customer['username'];
+	$password 		= $customer['password'];
+	$first_name 	= $customer['first_name'];
+	$last_name		= $customer['last_name'];
+	$email			= $customer['email'];
+	$role_id		= $customer_rold_id;
+	$date_created 	= $customer['date_created'];
 	$company 		= $customer['company'];
 	$address1 		= $customer['address1'];
 	$address2 		= $customer['address2'];
@@ -375,7 +377,27 @@ function insert_customer($customer){
 	$zip			= $customer['zip'];
 	$phone 			= $customer['phone'];
 
-	$user_id = insert_user($user);
+	//Get info to connect to the database
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Insert user data first since it is a separate table
+	$query = "INSERT INTO users (id, username, password, first_name, last_name, email, role_id, date_created)
+				VALUES ('', '$username', '$password', '$first_name', '$last_name', '$email', '$role_id', '$date_created')";
+
+	//Execute query
+	if(!$result = $mysqli->query($query)){
+		$message['error'] = 1;
+		$message['status'] .= "Query Error: " . $mysqli->error;
+	} else {
+		$message['error'] = 0;
+		$message['status'] .= "User successfully added<br/>";
+
+		//Set user_id on successful insert
+		$user_id = $mysqli->insert_id;
+	}
 
 	if($message['error'] == 0){
 		//Prepare insert customer query
@@ -391,7 +413,6 @@ function insert_customer($customer){
 			$message['status'] .= "Customer successfully added<br/>";
 		}
 	}
-
 	return $message;
 }
 
