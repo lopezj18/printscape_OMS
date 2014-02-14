@@ -9,7 +9,6 @@ function check_login($username, $password){
 
 		require_once('db_info.php');
 
-		//figure this shit out...
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 <<<<<<< HEAD
