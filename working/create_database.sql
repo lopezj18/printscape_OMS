@@ -8,18 +8,29 @@ SET time_zone = "+00:00";
 -- ------------------------------------
 
 --
+-- Truncate tables to clean them of data and reset auto_increment values
+--
+--SET FOREIGN_KEY_CHECKS=0;
+--TRUNCATE TABLE `customers`;
+--TRUNCATE TABLE `user_roles`;
+--TRUNCATE TABLE `user_orders`;
+--TRUNCATE TABLE `orders`;
+--TRUNCATE TABLE `users`;
+--SET FOREIGN_KEY_CHECKS=1;
+
+--
 -- Drop tables in order to avoid Foreign Key errors
 --
 
-DROP TABLE IF EXISTS `customers` CASCADE;
-DROP TABLE IF EXISTS `user_roles` CASCADE;
-DROP TABLE IF EXISTS `user_orders` CASCADE;
-DROP TABLE IF EXISTS `files` CASCADE;
-DROP TABLE IF EXISTS `statuses` CASCADE;
-DROP TABLE IF EXISTS `orders` CASCADE;
-DROP TABLE IF EXISTS `types` CASCADE;
-DROP TABLE IF EXISTS `roles` CASCADE;
-DROP TABLE IF EXISTS `users` CASCADE;
+--DROP TABLE IF EXISTS `customers` CASCADE;
+--DROP TABLE IF EXISTS `user_roles` CASCADE;
+--DROP TABLE IF EXISTS `user_orders` CASCADE;
+--DROP TABLE IF EXISTS `files` CASCADE;
+--DROP TABLE IF EXISTS `statuses` CASCADE;
+--DROP TABLE IF EXISTS `orders` CASCADE;
+--DROP TABLE IF EXISTS `types` CASCADE;
+--DROP TABLE IF EXISTS `roles` CASCADE;
+--DROP TABLE IF EXISTS `users` CASCADE;
 
 
 --

@@ -436,6 +436,7 @@ function create_customers(){
 	$customers[$i]['state'] = 'KY';
 	$customers[$i]['zip'] = '65125';
 
+	return $customers;
 }
 
 //22 orders
@@ -631,6 +632,5 @@ function create_user_orders(){
 
 	return $user_orders;
 }
-
 
 ?>
