@@ -53,7 +53,11 @@ function check_login($username, $password){
 
 function check_customer_role($customer_role){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if($customer_role == 1){
+=======
+	if($customer_role == '1'){
+>>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
 =======
 	if($customer_role == '1'){
 >>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
@@ -64,7 +68,11 @@ function check_customer_role($customer_role){
 
 function check_manager_role($manager_role){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if($manager_role == 2){
+=======
+	$manager_role = '2';{
+>>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
 =======
 	$manager_role = '2';{
 >>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
@@ -75,7 +83,11 @@ function check_manager_role($manager_role){
 
 function check_administrator_role($administrator_role){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if($administrator_role == 3){
+=======
+	$administrator_role = '3';{
+>>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
 =======
 	$administrator_role = '3';{
 >>>>>>> 932c9119d5bf3deb72c14fcc6a32062235cca853
