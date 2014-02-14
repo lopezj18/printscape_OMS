@@ -59,14 +59,14 @@ function check_customer_role($customer_role){
 }
 
 function check_manager_role($manager_role){
-	if($manager_role = 2){
+	if($manager_role == 2){
 		return true;
 	}
 	return false;	
 }
 
 function check_administrator_role($administrator_role){
-	if($administrator_role = 3){
+	if($administrator_role == 3){
 		return true;
 	}
 	return false;	
