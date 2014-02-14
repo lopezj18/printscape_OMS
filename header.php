@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="stylesheet" type="text/css" href="css/tables.css">
 	<link rel="stylesheet" type="text/css" href="css/forms.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
 </head>
 <body>
 	<header>
