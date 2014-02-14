@@ -11,20 +11,6 @@ function check_login($username, $password){
 
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
-<<<<<<< HEAD
-
-
-		//call the run_my_query()function from that include
-		$query = "SELECT users.id as user_id,
-						users.username as username,
-						users.first_name as first_name, 
-						user_roles.role_id as role_id,
-		FROM user_roles
-		JOIN users ON users.id=user_roles.user_id
-			WHERE username='$username'
-			AND password='$password'
-			";
-=======
 		$query = "SELECT users.id as id,
 					users.username as username,
 					users.first_name as first_name,
@@ -33,7 +19,6 @@ function check_login($username, $password){
 					LEFT JOIN user_roles ON user_roles.user_id=users.id
 				WHERE username='$username'
 				AND password='$password'";
->>>>>>> 2d7c2327cf43e68594a9f80ccdc6d93738301c3a
 		
 		//Execute query
 		if(!$result = $mysqli->query($query)){
