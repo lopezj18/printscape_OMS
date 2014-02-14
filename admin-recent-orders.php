@@ -20,7 +20,6 @@ require_once("header.php");
 
 <?php
 	$orders = retrieve_orders();
-	print_r($orders);
 	echo build_orders_table($orders);
 ?>
 
