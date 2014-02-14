@@ -14,25 +14,6 @@ function check_login($username, $password){
 
 
 
-"SELECT orders.id as orderId,
-					orders.due_date as dueDate,
-					orders.date_submitted as dateSubmitted,
-					orders.instructions as instructions,
-					types.name as typeName,
-					statuses.name as statusName,
-					users.first_name as firstName,
-					users.last_name as lastName,
-					customers.company as company
-			FROM user_orders
-			JOIN orders ON orders.id=user_orders.order_id
-			JOIN types ON types.id=orders.type_id
-			JOIN statuses ON statuses.id=orders.status_id
-			JOIN users ON users.id=user_orders.user_id
-			JOIN customers ON customers.user_id=users.id";	
-
-
-
-
 		//call the run_my_query()function from that include
 		$query = "SELECT users.id as user_id,
 						users.username as username,
@@ -76,6 +57,22 @@ function check_login($username, $password){
 			$status = "<div class='invalid-user'>Incorrect User Name or Password!!</div>";
 		}
 	return $status;
+}
+
+
+function check_customer_role($customer_role){
+	$customer_role['role_id'] = '1';
+		
+}
+
+function check_manager_role($manager_role){
+	$manager_role['role_id'] = '2';
+		
+}
+
+function check_administrator_role($administrator_role){
+	$administrator_role['role_id'] = '3';
+		
 }
 
 function build_users_table($users){
