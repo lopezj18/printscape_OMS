@@ -32,18 +32,18 @@ function check_login($username, $password){
 		//$result -> data_seek(0);
 		
 		if($row = $result -> fetch_assoc()){
-		
+			print_r($row);
 			//do goo thing :remember that they're logged in 
 			//echo "Correct!";
 			
 			//start a session to enable us to store session vars, which other pages cannot read
-			session_start();
+			//session_start();
 			//store the user's name in a session var
-			$_SESSION['username'] = $row['username'];
-			$_SESSION['logged_in'] = true;
-			$_SESSION['first_name'] = $row['first_name'];
-			$_SESSION['role_id'] = $row['role_id'];
-			$_SESSION['user_id'] = $row['user_id'];
+			//$_SESSION['username'] = $row['username'];
+			//$_SESSION['logged_in'] = true;
+			//$_SESSION['first_name'] = $row['first_name'];
+			//$_SESSION['role_id'] = $row['role_id'];
+			//$_SESSION['user_id'] = $row['id'];
 			//redirect them to view home page
 		header('Location:admin-recent-orders.php');
 		//otherwise
@@ -303,8 +303,6 @@ function build_type_options($types){
 	return $results;
 }
 
-
-
 function insert_user($user){
 
 	//Set up our vars for the query
@@ -335,6 +333,22 @@ function insert_user($user){
 	} else {
 		$message['error'] = 0;
 		$message['status'] = "User added successfully! <br/>";
+		$user_id = $mysqli->insert_id;
+	}
+
+	if($message['error'] == 0){
+		//Prepare insert user query
+		$query = "INSERT INTO user_roles(user_id, role_id) 
+					VALUES('$user_id', '$role_id')";
+
+		//Execute query
+		if(!$result = $mysqli->query($query)){
+			$message['error'] = 1;
+			$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
+		} else {
+			$message['error'] = 0;
+			$message['status'] = "User role assigned <br/>";
+		}
 	}
 
 	mysqli_close($mysqli);
