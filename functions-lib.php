@@ -50,20 +50,25 @@ function check_login($username, $password){
 	return $status;
 }
 
-
 function check_customer_role($customer_role){
-	$customer_role['role_id'] = '1';
-		
+	if($customer_role == 1){
+		return true;
+	}
+	return false;	
 }
 
 function check_manager_role($manager_role){
-	$manager_role['role_id'] = '2';
-		
+	if($manager_role = 2){
+		return true;
+	}
+	return false;	
 }
 
 function check_administrator_role($administrator_role){
-	$administrator_role['role_id'] = '3';
-		
+	if($administrator_role = 3){
+		return true;
+	}
+	return false;	
 }
 
 function build_users_table($users){
