@@ -290,6 +290,39 @@ function build_type_options($types){
 	return $results;
 }
 
+
+function retrieve_role_types(){
+	require_once('db_info.php');
+
+		//figure this shit out...
+		$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+		//call the run_my_query()function from that include
+		$query = "SELECT * FROM roles";
+		
+		//Execute query
+		if(!$result = $mysqli->query($query)){
+			echo "Query Error: " . $mysqli->error;
+		}
+		$roles = array();
+		$i = 0;
+		while($row = $result -> fetch_assoc()){
+			$roles[$i]['id'] .= $row['id'];
+			$roles[$i]['name'] .= $row['name'];
+		$i++;
+		}
+	return $roles;
+}
+
+function build_role_options($roles){
+	for($i=0; $i<count($roles); $i++){
+
+		$results .="<option value=".$roles[$i]['id'].">".$roles[$i]['name']."</option>";
+	}
+			
+	return $results;
+}
+
 function insert_user($user){
 
 	//Set up our vars for the query

@@ -87,7 +87,7 @@ input:required input:invalid {box-shadow:0 0 3px red;}*/
     <p><input type="tel" id="phoneExt" placeholder="Phone Number (Ext# Optional)" name="phone_number" required></p>
     <div id="#info"></div>
    
-	<p><input type="submit" name="submit" class="btn"></p>
+	<p><input type="submit" name="submit" value="Submit" class="btn"></p>
     </div>
 </form>
 <?php include("footer.php"); ?>

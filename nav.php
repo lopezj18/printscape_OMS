@@ -73,6 +73,7 @@ nav ul ul {
                 <li><a href="admin-all-users.php">All Users</a></li>
                 <li><a href="admin-recent-orders.php">Recent Orders</a></li>
                 <li><a href="submit-order.php">Submit Orders</a></li>
+                <li><a href="admin-new-user.php">Add Users</a></li>
                 <li><a href="run-tests.php">Run Tests</a></li>
                 <li><a href="logout.php">Log Out</a></li>
 			</ul>
