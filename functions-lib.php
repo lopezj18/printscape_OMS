@@ -357,7 +357,7 @@ return $user_id;
 }
 
 function insert_customer($customer){
-	$customer_role_id = 2;
+	//$customer_role_id = 2;
 
 	//Set up our vars for the query
 //	$company 		= $customer['company'];
@@ -376,7 +376,7 @@ function insert_customer($customer){
 	$last_name		= $customer['last_name'];
 	$email			= $customer['email'];
 	//$role_id		= $customer_role_id;
-	//$date_created 	= $customer['date_created'];
+	$date_created 	= $customer['date_created'];
 	$company 		= $customer['company'];
 	$address1 		= $customer['address1'];
 	$address2 		= $customer['address2'];
@@ -385,15 +385,6 @@ function insert_customer($customer){
 	$zip			= $customer['zip'];
 	$phone 			= $customer['phone'];
 
-	
-	
-//	$company 		= $customer['company'];
-//	$address1 		= $customer['address1'];
-//	$address2 		= $customer['address2'];
-//	$city 			= $customer['city'];
-//	$state			= $customer['state'];
-//	$zip			= $customer['zip'];
-//	$phone 			= $customer['phone'];
 
 	$id = insert_user($user);
 
