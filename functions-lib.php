@@ -312,7 +312,7 @@ function insert_user($user){
 	$first_name 	= $user['first_name'];
 	$last_name		= $user['last_name'];
 	$email			= $user['email'];
-	$role_id		= $user['role_id'];
+	$role_id		= 1;
 	$date_created 	= date("m-d-Y H:i:s");
 
 
@@ -360,12 +360,23 @@ function insert_customer($customer){
 	$customer_role_id = 2;
 
 	//Set up our vars for the query
-	$user['username']		= $customer['username'];
-	$user['password'] 		= $customer['password'];
-	$user['first_name'] 	= $customer['first_name'];
-	$user['last_name']		= $customer['last_name'];
-	$user['email']			= $customer['email'];
-	$user['role_id']		= $customer_rold_id;
+//	$company 		= $customer['company'];
+//	$address1 		= $customer['address1'];
+//	$address2 		= $customer['address2'];
+//	$city 			= $customer['city'];
+//	$state			= $customer['state'];
+//	$zip			= $customer['zip'];
+//	$phone 			= $customer['phone'];
+	
+	
+	
+	$username		= $customer['username'];
+	$password 		= $customer['password'];
+	$first_name 	= $customer['first_name'];
+	$last_name		= $customer['last_name'];
+	$email			= $customer['email'];
+	//$role_id		= $customer_role_id;
+	//$date_created 	= $customer['date_created'];
 	$company 		= $customer['company'];
 	$address1 		= $customer['address1'];
 	$address2 		= $customer['address2'];
@@ -374,12 +385,28 @@ function insert_customer($customer){
 	$zip			= $customer['zip'];
 	$phone 			= $customer['phone'];
 
-	$user_id = insert_user($user);
+	
+	
+//	$company 		= $customer['company'];
+//	$address1 		= $customer['address1'];
+//	$address2 		= $customer['address2'];
+//	$city 			= $customer['city'];
+//	$state			= $customer['state'];
+//	$zip			= $customer['zip'];
+//	$phone 			= $customer['phone'];
+
+	$id = insert_user($user);
+
+	//Get info to connect to the database
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	if($message['error'] == 0){
 		//Prepare insert customer query
 		$query = "INSERT INTO customers (id, user_id, company, address1, address2, city, state, zip, phone) 
-					VALUES ('', '$user_id', '$company', '$address1', '$address2', '$city', '$state', '$zip', '$phone')";
+					VALUES ('', '$id', '$company', '$address1', '$address2', '$city', '$state', '$zip', '$phone')";
 
 		//Execute query
 		if(!$result = $mysqli->query($query)){

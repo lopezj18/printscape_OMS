@@ -4,7 +4,7 @@ require_once("authenticate.php");
 require_once("header.php");
 ?>
 
-<?php require_once('customer-nav.php'); ?>
+<?php //require_once('customer-nav.php'); ?>
 
 <form class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
 	 <div>
