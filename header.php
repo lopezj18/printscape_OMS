@@ -19,22 +19,19 @@
 			<a href="index.php"><div><img src="images/logo.png"><p>Ordering Management System</p></div></a>
 		</div>
 	</header>
-	<div class="wrapper">
-
 <?php
 	if(check_customer_role($_SESSION['role_id'])){
 		include('customer-nav.php');
 	}
-	
+?>
+<div class="wrapper">
+<?php    
 	if(check_manager_role($_SESSION['role_id'])){
-		include('customer-nav.php');
 		include('nav.php');
 	}
-	
+
 	if(check_administrator_role($_SESSION['role_id'])){
 		include('customer-nav.php');
 		include('nav.php');
-	}
-	
-	print_r($_SESSION);
+}
 ?>
