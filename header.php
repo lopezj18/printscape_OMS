@@ -6,12 +6,12 @@
 	<!-- May not want to set NO-CACHE here -->
 	<!-- <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"> -->
 	<title>Printscape</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/clearfix.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link rel="stylesheet" type="text/css" href="css/tables.css">
-	<link rel="stylesheet" type="text/css" href="css/forms.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/clearfix.css"/>
+	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<link rel="stylesheet" type="text/css" href="css/tables.css"/>
+	<link rel="stylesheet" type="text/css" href="css/forms.css"/>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"/>
 </head>
 <body>
 	<header>

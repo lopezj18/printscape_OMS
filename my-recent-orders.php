@@ -18,7 +18,8 @@ a:active{color:white;}
 <tr><th>Id#</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
 
 <?php
-	$orders = retrieve_orders();
+	$sort = 'date_submitted';
+	$orders = retrieve_orders($sort);
 	echo build_orders_table($orders);
 ?>
 

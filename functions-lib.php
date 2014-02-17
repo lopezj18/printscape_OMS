@@ -141,8 +141,8 @@ function retrieve_orders($sort){
 					orders.instructions as instructions,
 					types.name as type_name,
 					statuses.name as status_name,
-					users.first_name as firstName,
-					users.last_name as lastName,
+					users.first_name as first_name,
+					users.last_name as last_name,
 					customers.company as company
 			FROM user_orders
 				LEFT JOIN orders ON orders.id=user_orders.order_id
