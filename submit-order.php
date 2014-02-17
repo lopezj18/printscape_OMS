@@ -11,7 +11,7 @@ require_once("header.php");
      <h1>Submit An Order</h1>
     <p><select name="type" required>
     <option value="">Pick an Order Type</option>
-			<?php $types = retirve_order_types();
+			<?php $types = retrieve_order_types();
 						echo build_type_options($types);?>
        
             

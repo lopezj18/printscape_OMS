@@ -99,21 +99,6 @@ function build_customers_table($customers){
 	return $results;
 }
 
-//function build_customers_table($customers){
-//	for($i=0; $i<(20); $i++){
-//
-//		$results .="<tr><td>".$orders[$i]['id']."</td>";
-//		$results .="<td>".$orders[$i]['company']."</td>";
-//		$results .="<td>".$orders[$i]['address_1']."</td>";
-//		$results .="<td>".$orders[$i]['address_2']."</td>";
-//		$results .="<td>".$orders[$i]['city']."</td>";
-//		$results .="<td>".$orders[$i]['state']."</td>";
-//		$results .="<td>".$orders[$i]['zip']."</td>";
-//		$results .="<td>".$orders[$i]['phone_number']."</td>";
-//
-//	return $results;
-//}
-
 function build_orders_table($orders){
 	for($i=0; $i<count($orders); $i++){
 
@@ -122,7 +107,7 @@ function build_orders_table($orders){
 		$results .="<td>".$orders[$i]['company']."</td>";
 		$results .="<td>".$orders[$i]['type_id']."</td>";
 		$results .="<td>".date ('m-d-Y', strtotime($orders[$i]['due_date']))."</td>";
-		$results .="<td>".date ('m-d-Y', strtotime($orders[$i]['date_submited']))."</td>";
+		$results .="<td>".date ('m-d-Y', strtotime($orders[$i]['date_submitted']))."</td>";
 		$results .="<td>".$orders[$i]['status']."</td>";
 		$results .="<td>".$orders[$i]['file']."</td>";
 
@@ -164,7 +149,8 @@ function retrieve_orders(){
 				LEFT JOIN types ON types.id=orders.type_id
 				LEFT JOIN statuses ON statuses.id=orders.status_id
 				LEFT JOIN users ON users.id=user_orders.user_id
-				LEFT JOIN customers ON customers.user_id=users.id";
+				LEFT JOIN customers ON customers.user_id=users.id
+			ORDER BY dateSubmitted DESC";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
@@ -272,7 +258,7 @@ function retrieve_users(){
 	return $users;
 }
 
-function retirve_order_types(){
+function retrieve_order_types(){
 	require_once('db_info.php');
 
 		//figure this shit out...
@@ -312,7 +298,7 @@ function insert_user($user){
 	$first_name 	= $user['first_name'];
 	$last_name		= $user['last_name'];
 	$email			= $user['email'];
-	$role_id		= 1;
+	$role_id		= $user['role_id'];
 	$date_created 	= date("m-d-Y H:i:s");
 
 
@@ -358,17 +344,6 @@ return $user_id;
 
 function insert_customer($customer){
 	$customer_role_id = 1;
-
-	//Set up our vars for the query
-//	$company 		= $customer['company'];
-//	$address1 		= $customer['address1'];
-//	$address2 		= $customer['address2'];
-//	$city 			= $customer['city'];
-//	$state			= $customer['state'];
-//	$zip			= $customer['zip'];
-//	$phone 			= $customer['phone'];
-	
-	
 	
 	$username		= $customer['username'];
 	$password 		= $customer['password'];
@@ -412,18 +387,25 @@ function insert_customer($customer){
 	return $message;
 }
 
+//Reorders a due date and converts it from a string to time
+function process_due_date($date_string){
+	$date_array = explode('/', $date_string);
+	$result = $date_array[2]."-".$date_array[0]."-".$date_array[1]." 00:00:00";
+	$result = strtotime($result);
+	$result = date("Y-m-d H:i:s", $result);
+	return $result;
+}
+
 function insert_order($order){
 
 	//Set up our vars for the query
-	$id 			= $order['id'];
+	$user_id		= $order['user_id'];
 	$type_id 		= $order['type_id'];
 	$due_date 		= $order['due_date'];
-	$date_submitted	= date('m-d-Y H-i-m');
+	$date_submitted	= date('Y-m-d H:i:s');
 	$status_id		=  1;
 	$instructions 	= $order['instructions'];
-echo $type_id;
 
-print_r ($order);
 	//Get info to connect to the database
 	require('db_info.php');
 
@@ -434,32 +416,28 @@ print_r ($order);
 	$query = "INSERT INTO orders (id, type_id, due_date, date_submitted, status_id, instructions) 
 				VALUES ('', '$type_id', '$due_date', '$date_submitted', '$status_id', '$instructions')";
 
-
 	if(!$result = $mysqli->query($query)){
 		$message['error'] = 1;
 		$message['status'] = "Query Error: " . $mysqli->error ."<br/>";
 	} else {
+		$order_ids['user_id'] = $user_id;
+		$order_ids['order_id'] = $mysqli->insert_id;
 		$message['error'] = 0;
 		$message['status'] = "Order added successfully! <br/>";
+
+		insert_user_order($order_ids);
 	}
 
 	mysqli_close($mysqli);
 return $message;
 
 }
-	//Execute query
-	//if(!$result = $mysqli->query($query)){
-	//	echo "Query Error: " . $mysqli->error;
-	//} else {
-	//	echo "Your order was added successfully!";
-	//}
-//}
 
-function insert_user_order($user_order){
+function insert_user_order($order_ids){
 
 	//Set up our vars for the query
-	$user_id 		= $user_order['user_id'];
-	$order_id 		= $user_order['order_id'];
+	$user_id 		= $order_ids['user_id'];
+	$order_id 		= $order_ids['order_id'];
 
 	//Get info to connect to the database
 	require('db_info.php');
