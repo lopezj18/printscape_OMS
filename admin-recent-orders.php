@@ -19,7 +19,8 @@ require_once("header.php");
 <tr><th>Order #</th><th>Customer Name</th><th>Company</th><th>Type</th><th>Due Date</th><th>Date Submitted</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
 
 <?php
-	$orders = retrieve_orders();
+	$sort = "date_submitted";
+	$orders = retrieve_orders($sort);
 	echo build_orders_table($orders);
 ?>
 

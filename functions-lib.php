@@ -128,19 +128,19 @@ function build_orders_table($orders){
 	return $results;
 }
 
-function retrieve_orders(){
+function retrieve_orders($sort){
 	require('db_info.php');
 
 	//Create db connection
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert customer query
-	$query = "SELECT orders.id as orderId,
-					orders.due_date as dueDate,
-					orders.date_submitted as dateSubmitted,
+	$query = "SELECT orders.id as order_id,
+					orders.due_date as due_date,
+					orders.date_submitted as date_submitted,
 					orders.instructions as instructions,
-					types.name as typeName,
-					statuses.name as statusName,
+					types.name as type_name,
+					statuses.name as status_name,
 					users.first_name as firstName,
 					users.last_name as lastName,
 					customers.company as company
@@ -150,7 +150,7 @@ function retrieve_orders(){
 				LEFT JOIN statuses ON statuses.id=orders.status_id
 				LEFT JOIN users ON users.id=user_orders.user_id
 				LEFT JOIN customers ON customers.user_id=users.id
-			ORDER BY dateSubmitted DESC";
+			ORDER BY $sort DESC";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
