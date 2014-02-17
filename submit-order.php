@@ -6,7 +6,7 @@ require_once("header.php");
 
 <?php //require_once('customer-nav.php'); ?>
 
-<form id="upload" class="submit_order" action="process-submit-order.php" method="POST" enctype="multipart/form-data">
+<form id="upload" class="submit_order" action="upload.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Submit An Order</h1>
     <p><select name="type" required>
@@ -32,6 +32,7 @@ require_once("header.php");
 	<p><input type="submit" class="btn" value="Submit"></p>
     </div>
 </form>
+
     <!-- JavaScript Includes -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/uploader/jquery.knob.js"></script>
