@@ -4,10 +4,11 @@
 .custnav{width:100%; display:block; height:34px; overflow:hidden; background-color:#333;}
 .custul{width:960px; display:block; overflow:hidden; margin:0 auto; float:none !important;}
 .custli{padding:10px 10px; font-size:16px;  float:left; width:30%; text-align:center; }
+.custli:hover{background:#282828 !important;}
 .custa{display:inline !important;}
 a:link{color:white;}
 a:visited{color:white;}
-a:hover{color:#9FA615;}
+a:hover{color:#9FA615; background-color:#282828 !important;}
 a:active{color:#9FA615;}
 </style>
 <nav class="custnav">
