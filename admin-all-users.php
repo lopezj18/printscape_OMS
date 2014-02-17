@@ -11,7 +11,7 @@ a:visited{color:#9fa615;}
 a:hover{color:white;}
 a:active{color:white;}
 </style>
-<?php require_once('nav.php'); ?>
+<?php //require_once('nav.php'); ?>
 
 <h1 class="h1_titles">All Users</h1>
 <table class="tftable" border="1">

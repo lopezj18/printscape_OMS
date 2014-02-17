@@ -12,7 +12,7 @@ require_once("header.php");
 	a:hover{color:white;}
 	a:active{color:white;}
 </style>
-<?php require_once('nav.php'); ?>
+<?php //require_once('nav.php'); ?>
 
 <h1 class="h1_titles">Recent Orders</h1>
 <table class="tftable" border="1">
