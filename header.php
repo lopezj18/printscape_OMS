@@ -29,7 +29,7 @@
 	if(check_customer_role($_SESSION['role_id'])){
 		include('customer-nav.php');
 	}
-if(check_administrator_role($_SESSION['role_id'])){
+	if(check_administrator_role($_SESSION['role_id'])){
 		include('customer-nav.php');
 }
 ?>

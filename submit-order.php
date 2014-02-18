@@ -2,6 +2,7 @@
 session_start();
 require_once("authenticate.php");
 require_once("header.php");
+if($is_customer) $customer_info = retrieve_customer_info();
 ?>
 
 <?php //require_once('customer-nav.php'); ?>
@@ -35,10 +36,6 @@ require_once("header.php");
 
     </div>
 </form>
-
-<?php
-    $firephp->log($_POST);
-?>
 <?php
 include("footer.php");
 ?>

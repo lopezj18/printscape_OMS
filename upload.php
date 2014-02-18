@@ -12,6 +12,10 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 		exit;
 	}
 
+	if($is_customer) $upload_loc = $customer_info['company']."/".date('m-d-Y');
+	$firephp->log($upload_loc);
+	$firephp->log($_SESSION);
+
 	if(move_uploaded_file($_FILES['upl']['tmp_name'], 'test_uploads/'.$_FILES['upl']['name'])){
 		echo '{"status":"success"}';
 		exit;

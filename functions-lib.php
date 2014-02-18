@@ -52,7 +52,6 @@ function check_login($username, $password){
 					$_SESSION['is_admin'] = true;
 					break;
 			}
-			
 			//redirect them to view home page
 			header('Location:admin-recent-orders.php');
 			//otherwise
@@ -235,6 +234,37 @@ function retrieve_customers(){
 	return $customers;
 }
 
+function retrieve_customer_info($user_id){
+	require('db_info');
+
+	//Create db connection
+	$mysli = new $myslqi($hname, $uname, $pass, $db);
+
+	//Prepare query
+	$query = "SELECT *
+			FROM customers
+			LEFT JOIN users on users.id = customers.user_id
+			WHERE users.id = $user_id";
+
+	//Execute query		
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: ".$mysqli->error;
+	}
+	else{
+		while($row = $result->fetch_assoc()){
+			$customer_info['user_id'] 		= $row['user_id'];
+			$customer_info['customer_id'] 	= $row['customer_id'];
+			$customer_info['company'] 		= $row['company'];
+			$customer_info['address1'] 		= $row['address1'];
+			$customer_info['address2'] 		= $row['address2'];
+			$customer_info['city'] 			= $row['city'];
+			$customer_info['state'] 		= $row['state'];
+			$customer_info['zip'] 			= $row['zip'];
+			$customer_info['phone'] 		= $row['phone'];
+		}
+	}
+	return $customer_info;
+}
 
 function retrieve_users(){
 	require('db_info.php');
