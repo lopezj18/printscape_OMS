@@ -40,9 +40,22 @@ function check_login($username, $password){
 			$_SESSION['first_name'] = $row['first_name'];
 			$_SESSION['role_id'] = $row['role_id'];
 			$_SESSION['user_id'] = $row['id'];
+			//Set role booleans
+			switch($row['role_id']){
+				case 1:
+					$_SESSION['is_customer'] = true;
+					break;
+				case 2:
+					$_SESSION['is_manager'] = true;
+					break;
+				case 3:
+					$_SESSION['is_admin'] = true;
+					break;
+			}
+			
 			//redirect them to view home page
-		header('Location:admin-recent-orders.php');
-		//otherwise
+			header('Location:admin-recent-orders.php');
+			//otherwise
 		}else{
 			//send them back and trigger a message
 			$status = "<div class='invalid-user'>Incorrect User Name or Password!!</div>";

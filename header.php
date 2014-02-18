@@ -1,4 +1,10 @@
-<?php require_once('functions-lib.php'); ?>
+<?php
+	require_once('functions-lib.php'); 
+	// FirePHP for debugging PHP
+	require_once('FirePHPCore/FirePHP.class.php');
+	ob_start();
+	$firephp = FirePHP::getInstance(true);
+?>
 <!doctype html>
 <html>
 <head>

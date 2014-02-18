@@ -48,7 +48,7 @@
 .expandable_row:hover {
   height: 90px;
   white-space: normal;
-  transition: height east-out .2s; }
+  transition: height ease-out .2s; }
 .expandable_row:hover .expandable_arrow {
     display: none; }
   .expandable_row:hover .full_instructions {

@@ -9,10 +9,10 @@ h1{
 	margin-top:20px;
 }
 input:invalid {
-    -moz-box-shadow: none;
+    box-shadow: none;
 }
 form{
-	height: auto;
+	/*height: auto;*/
 	background-color: rgb(193, 215, 46);
 	width: 500px;
 	border-radius: 6px;
@@ -33,7 +33,7 @@ form{
 }
 form div{
 	margin:0 auto;
-	overflow:hidden;
+	/*overflow:hidden;*/
 	width:300px;
 }
 p{
@@ -72,7 +72,7 @@ input{
     margin-top:3px;
     font-size:0.9em;
     color:#717174;
-    -moz-border-radius:5px;
+    border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
 	font-size:18px;
@@ -107,7 +107,7 @@ textarea{
     margin-top:10px;
     font-size:0.9em;
     color:#717174;
-    -moz-border-radius:5px;
+    border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
 	font-size:18px;
@@ -124,7 +124,7 @@ select{
     margin-top:3px;
     font-size:0.9em;
     color:#717174;
-    -moz-border-radius:5px;
+    border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
 	font-size:18px;
@@ -158,15 +158,12 @@ select:focus, textarea:focus {
 	background-color:#DEDEDE;
     padding: 40px 0;
     margin-bottom: 10px;
-    border: 20px solid rgba(0, 0, 0, 0);
-    border-radius: 3px;
-    border-image: url('../images/border-image.png') 25 repeat;
     text-align: center;
     text-transform: uppercase;
-
     font-size:16px;
     font-weight:bold;
     color:#7f858a;
+    border:#999 dashed 1px;
 }
 
 #drop a{
@@ -192,8 +189,8 @@ select:focus, textarea:focus {
 
 #upload ul{
     list-style:none;
-    margin:0 -30px;
-    /*border-top:1px solid #2b2e31;
+    /*margin:0 -30px;
+    border-top:1px solid #2b2e31;
     border-bottom:1px solid #3d4043;*/
 }
 
@@ -207,7 +204,7 @@ select:focus, textarea:focus {
 
     border-top:1px solid #3d4043;
     border-bottom:1px solid #2b2e31;
-    padding:15px;
+    padding:15px 0;
     height: 52px;
 
     position: relative;
@@ -226,7 +223,8 @@ select:focus, textarea:focus {
     font-weight: bold;
     position: absolute;
     top: 20px;
-    left: 100px;
+    /*left: 100px;*/
+    left: 85px;
 }
 
 #upload ul li i{
@@ -239,7 +237,7 @@ select:focus, textarea:focus {
 #upload ul li canvas{
     top:15px;
     /*left:32px;*/
-    left:41px;
+    left:20px;
     position: absolute;
 }
 

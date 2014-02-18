@@ -3,10 +3,7 @@
 session_start();
 require_once("authenticate.php");
 require_once("functions-lib.php");
-if($_FILES){
-	print_r($_FILES);
-    require_once("upload.php");
-}
+
 
 //store in a var of the user's choice 
 $order = array();
