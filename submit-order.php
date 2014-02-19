@@ -21,6 +21,8 @@ if($is_customer) $customer_info = retrieve_customer_info();
         
         <p><input type="date" placeholder="Due Date mm/dd/yyyy" name="due_date"></p>
         
+        <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions to 150 characters)" name="special_instructions"></textarea></p>
+
         <div id="drop">
             <p>Drop Here</p>
             <a>Browse</a>
@@ -31,8 +33,11 @@ if($is_customer) $customer_info = retrieve_customer_info();
             <!-- The file uploads will be shown here -->
         </ul>
 
-        <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions to 150 characters)" name="special_instructions"></textarea></p>
-    	<p><input type="submit" class="btn" value="Submit"></p>
+        <div id="status">
+            <p>Status:</p>
+        </div>
+        <!-- Submit button no longer needed with AJAX, instead we need to display a message on success!
+    	<p><input type="submit" class="btn" value="Submit"></p>-->
 
     </div>
 </form>

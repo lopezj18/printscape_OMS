@@ -21,11 +21,6 @@ $customer['state'] = sanitize($_POST['state']);
 $customer['zip'] = sanitize($_POST['zip']);
 $customer['phone_number'] = sanitize($_POST['phone_number']);
 
-
-$message = insert_user($user);
-print_r($message);
-
-
 $message = insert_customer($customer);
 print_r($message);
 

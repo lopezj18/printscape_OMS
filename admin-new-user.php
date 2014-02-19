@@ -4,7 +4,7 @@ require_once("authenticate.php");
 require_once("header.php");
 ?>
 
-<form class="sign_up_form" action="process-sign-up.php" method="POST" enctype="multipart/form-data">
+<form class="sign_up_form" action="process-admin-new-user.php" method="POST" enctype="multipart/form-data">
 	 <div>
      <h1>Create a User Account</h1>
     <p><input type="hidden" placeholder="" name="newuser_id"></p>
@@ -21,5 +21,6 @@ require_once("header.php");
 	<p><input type="submit" name="submit" value="Submit" class="btn"></p>
     </div>
 <?php
+
 include("footer.php");
 ?> 

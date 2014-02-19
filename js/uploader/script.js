@@ -67,6 +67,10 @@ $(function(){
             data.context.addClass('error');
         }
 
+        done:function(){
+            //Files are succesfully uploaded!
+            data.context.append('Order Submitted');
+        }
     });
 
 
