@@ -2,7 +2,6 @@
 //put code from external file right here before the doctype:
 require_once("authenticate.php");
 require_once("functions-lib.php");
-require_once("db-connect.php");
 //store in a var of the user's choice 
 $user = array();
 $user['username'] = sanitize($_POST['username']);

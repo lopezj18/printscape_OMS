@@ -28,7 +28,7 @@
 .tftable td {
   font-size: 12px;
   border-width: 1px;
-  padding: 8px;
+  padding: 8px 4px;
   border-style: solid;
   border-color: #a9a9a9;
   max-width: 240px;
@@ -37,7 +37,6 @@
   white-space: nowrap;
   overflow: hidden;
   transition: height ease-in .2s;
-  padding-right: 25px; }
 
 /*.tftable td:hover{
 	height:inherit;

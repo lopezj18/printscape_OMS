@@ -83,15 +83,37 @@ function check_administrator_role($administrator_role){
 	return false;	
 }
 
-function build_users_table($users){
+function build_users_table($users, $tabletype){
+	
+		$results .="<table class='tftable' border='1'>";
+		$results .="<tr><th>User Id</th>";
+		$results .="<th>Username</th>";
+		$results .="<th>First Name</th>";
+		$results .="<th>Last Name</th>";
+		$results .="<th>Email Address</th>";
+		$results .="<th>Date Created</th>";
+		if($tabletype == 'delete'){
+			$results .="<th>Delete</th>";
+		}
+		$results .="</tr>";
+		
 	for($i=0; $i<count($users); $i++){
 		$results .="<tr><td>".$users[$i]['id']."</td>";
 		$results .="<td>".$users[$i]['username']."</td>";
 		$results .="<td>".$users[$i]['first_name']."</td>";
 		$results .="<td>".$users[$i]['last_name']."</td>";
 		$results .="<td>".$users[$i]['email']."</td>";
-		$results .="<td>".date ('m-d-Y', strtotime($users[$i]['date_created']))."</td></tr>";
+		$results .="<td>".date ('m-d-Y', strtotime($users[$i]['date_created']))."</td>";
+		
+		if($tabletype == 'delete'){
+			$results .="<td><input type='checkbox' name='deletecheckbox' value='".$users[$i]['id']."'/></td>";
+		}
+		
+		$results .="</tr>";
+		
 	}
+	$results .="</table>";
+	$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
 	return $results;
 }
 
@@ -341,7 +363,8 @@ function retrieve_role_types(){
 		$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 		//call the run_my_query()function from that include
-		$query = "SELECT * FROM roles";
+		$query = "SELECT * FROM roles
+		WHERE id > 1";
 		
 		//Execute query
 		if(!$result = $mysqli->query($query)){
@@ -385,8 +408,8 @@ function insert_user($user){
 	$mysqli = new mysqli($hname, $uname, $pass, $db);
 
 	//Prepare insert user query
-	$query = "INSERT INTO users(id, username, password, first_name, last_name, email, role_id, date_created) 
-				VALUES('', '$username', '$password', '$first_name', '$last_name', '$email', '$role_id', '$date_created')";
+	$query = "INSERT INTO users(id, username, password, first_name, last_name, email, date_created) 
+				VALUES('', '$username', '$password', '$first_name', '$last_name', '$email', '$date_created')";
 
 	//Execute query
 	if(!$result = $mysqli->query($query)){
@@ -557,6 +580,19 @@ function insert_file($file){
 		echo "Your order was added successfully!";
 	}
 }
+
+function get_url() {
+		$pageURL = 'http';
+		if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+		$pageURL .= "://";
+		if ($_SERVER["SERVER_PORT"] != "80") {
+		 $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		} else {
+		 $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		}
+		return $pageURL;
+	}	
+
 
 ///* BEGIN STATIC DATA FUNCTIONS */
 //

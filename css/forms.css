@@ -21,15 +21,15 @@ form{
 	margin-top: 15px;
 	padding-bottom:25px;
 }
-.submit_order{
-	/*height: 530px;*/
-	/* Changed height to auto to account for an unknown number of file uploads which could increase length of form 
-	height:auto;
-	margin-top: 30px;*/
+.formtable{
+	width:100% !important;
+	background-color:transparent !important;
+	margin:0;
+	border:none;
 }
-.sign_up_form{
-	/*height: 970px;
-	margin-top: 0px;*/
+tr input{
+	width:auto;
+	height:auto;
 }
 form div{
 	margin:0 auto;
