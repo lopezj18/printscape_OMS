@@ -11,17 +11,15 @@ $user['first_name'] = sanitize($_POST['first_name']);
 $user['last_name'] = sanitize($_POST['last_name']);
 $user['email'] = sanitize($_POST['email']);
 $user['date_created'] = date ("m-d-Y H:i:s");
-
-$roles = array();
-$roles['role_id'] = sanitize($_POST['role_id']);
+$user['role_id'] = sanitize($_POST['role_id']);
 
 
 $message = insert_user($user);
 print_r($message);
 
 
-$message = insert_customer($roles);
-print_r($message);
+//$message = insert_customer($roles);
+//print_r($message);
 
 
 //$submit = filter_input(INPUT_POST, 'submit');
