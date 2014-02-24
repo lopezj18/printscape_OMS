@@ -118,7 +118,23 @@ function build_users_table($users, $tabletype){
 }
 
 function build_customers_table($customers){
-
+	
+	$results .="<table class='tftable' border='1'>";
+		$results .="<tr><th>User Id</th>";
+		$results .="<th>Comapny</th>";
+		$results .="<th>Address 1</th>";
+		$results .="<th>Address 2</th>";
+		$results .="<th>City</th>";
+		$results .="<th>State</th>";
+		$results .="<th>Zip</th>";
+		$results .="<th>Phone Number</th>";
+		$results .="<th>Date Created</th>";
+		if($tabletype == 'delete'){
+			$results .="<th>Delete</th>";
+		}
+		$results .="</tr>";
+	
+	
 	for($i=0; $i<count($customers); $i++){
 		$results .="<tr><td>".$customers[$i]['id']."</td>";
 		$results .="<td>".$customers[$i]['company']."</td>";
@@ -128,8 +144,14 @@ function build_customers_table($customers){
 		$results .="<td>".$customers[$i]['state']."</td>";
 		$results .="<td>".$customers[$i]['zip']."</td>";
 		$results .="<td>".$customers[$i]['phone']."</td>";
-		$results .="<td>".date ('m-d-Y', strtotime($customers[$i]['date_created']))."</td></tr>";
+		$results .="<td>".date ('m-d-Y', strtotime($customers[$i]['date_created']))."</td>";
+		if($tabletype == 'delete'){
+			$results .="<td><input type='checkbox' name='deletecheckbox' value='".$customers[$i]['id']."'/></td>";
+		}
+		$results .="</tr>";
 	}
+	$results .="</table>";
+	$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
 	return $results;
 }
 

@@ -72,6 +72,7 @@ nav ul ul {
                 <li><a href="admin-all-clients.php">All Customers</a></li>
                 <li><a href="admin-all-users.php">All Users</a></li>
                 <li><a href="admin-all-users.php?tabletype=delete">Delete Users</a></li>
+                <li><a href="admin-all-clients.php?tabletype=delete">Delete Customers</a></li>
                 <li><a href="admin-recent-orders.php">Recent Orders</a></li>
                 <li><a href="submit-order.php">Submit Orders</a></li>
                 <li><a href="admin-new-user.php">Add Manager or Admin</a></li>

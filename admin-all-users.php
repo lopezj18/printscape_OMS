@@ -5,9 +5,7 @@ require_once("authenticate.php");
 $url = explode('?tabletype=', get_url());
 $tabletype = $url[1];
 ?>
-<style type="text/css">
 
-</style>
 
 <form class="formtable" action="process-delete-users.php" method="POST" enctype="multipart/form-data">
 <h1 class="h1_titles">All Users</h1>
