@@ -3,6 +3,9 @@ session_start();
 require_once("authenticate.php");
 require_once("functions-lib.php");
 require_once("header.php");
+
+$url = explode('?tabletype=', get_url());
+$tabletype = $url[1];
 ?>
 
 <style type="text/css">
@@ -13,30 +16,15 @@ require_once("header.php");
 	a:active{color:white;}
 </style>
 <?php //require_once('nav.php'); ?>
-
+<form class="formtable" action="process-delete-orders.php" method="POST" enctype="multipart/form-data">
 <h1 class="h1_titles">Recent Orders</h1>
-<table class="tftable" border="1">
-	<tr>
-		<th>Order #</th>
-		<th>Customer Name</th>
-		<th>Company</th>
-		<th>Type</th>
-		<th>Due Date</th>
-		<th>Date Submitted</th>
-		<th>Status</th>
-		<th>File</th>
-		<th>Special Instructions</th>
-		<th>Delete</th>
-	</tr>
 
 <?php
 	$sort = "date_submitted";
 	$orders = retrieve_orders($sort);
-	echo build_orders_table($orders);
+	echo build_orders_table($orders, $tabletype);
 ?>
-
-</table>
-
+</form>
 
 <?php
 require_once("footer.php");

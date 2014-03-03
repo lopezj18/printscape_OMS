@@ -106,18 +106,20 @@ function build_users_table($users, $tabletype){
 		$results .="<td>".date ('m-d-Y', strtotime($users[$i]['date_created']))."</td>";
 		
 		if($tabletype == 'delete'){
-			$results .="<td><input type='checkbox' name='deletecheckbox' value='".$users[$i]['id']."'/></td>";
+			$results .="<td><input type='checkbox' name='deletecheckbox[$i]' value='".$users[$i]['id']."'/></td>";
 		}
 		
 		$results .="</tr>";
 		
 	}
 	$results .="</table>";
-	$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
+		if($tabletype == 'delete'){
+			$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
+		}
 	return $results;
 }
 
-function build_customers_table($customers){
+function build_customers_table($customers, $tabletype){
 	
 	$results .="<table class='tftable' border='1'>";
 		$results .="<tr><th>User Id</th>";
@@ -145,19 +147,37 @@ function build_customers_table($customers){
 		$results .="<td>".$customers[$i]['zip']."</td>";
 		$results .="<td>".$customers[$i]['phone']."</td>";
 		$results .="<td>".date ('m-d-Y', strtotime($customers[$i]['date_created']))."</td>";
+		
 		if($tabletype == 'delete'){
-			$results .="<td><input type='checkbox' name='deletecheckbox' value='".$customers[$i]['id']."'/></td>";
-		}
+			$results .="<td><input type='checkbox' name='deletecheckbox[$i]' value='".$customers[$i]['id']."'/></td>";
+	}
 		$results .="</tr>";
 	}
 	$results .="</table>";
-	$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
+		if($tabletype == 'delete'){
+			$results .="<input type='submit' name='delete' value='Delete' class='btn'/>";
+		}
 	return $results;
 }
 
-function build_orders_table($orders){
+function build_orders_table($orders, $tabletype){
+	
+		
+	$results .="<table class='tftable' border='1'>";
+		$results .="<tr><th>Order #</th>";
+		$results .="<th>Customer Name</th>";
+		$results .="<th>Company</th>";
+		$results .="<th>Type</th>";
+		$results .="<th>Due Date</th>";
+		$results .="<th>Date Submitted</th>";
+		$results .="<th>Status</th>";
+		$results .="<th>File</th>";
+		$results .="<th>Special Instructions</th>";
+	if($tabletype == 'delete'){
+			$results .="<th>Delete</th>";
+		}
+		$results .="</tr>";
 	for($i=0; $i<count($orders); $i++){
-
 		$results .="<tr><td>".$orders[$i]['id']."</td>";
 		$results .="<td>".$orders[$i]['customer_name']."</td>";
 		$results .="<td>".$orders[$i]['company']."</td>";
@@ -178,8 +198,15 @@ function build_orders_table($orders){
 			</td>";
 		}
 		else $results .="<td>".$orders[$i]['instructions']."</td>";
-
-		$results .="<td>".$orders[$i]['delete']."</td></tr>";
+		
+		if($tabletype == 'delete'){
+			$results .="<td><input type='checkbox' name='deletecheckbox[$i]' value='".$orders[$i]['id']."'/></td>";
+		}
+		$results .="</tr>";
+	}
+		$results .="</table>";
+		if($tabletype == 'delete'){
+		$results .="<input type='submit' name='delete' value='delete' class='btn'/>";
 	}
 	return $results;
 }
@@ -615,6 +642,22 @@ function get_url() {
 		return $pageURL;
 	}	
 
+function delete($tablename, $id){
+	//Get info to connect to the database
+	require('db_info.php');
+
+	//Create db connection
+	$mysqli = new mysqli($hname, $uname, $pass, $db);
+
+	//Prepare insert file query
+	$query = "DELETE FROM $tablename WHERE id = $id";
+	
+	if(!$result = $mysqli->query($query)){
+		echo "Query Error: " . $mysqli->error;
+	} else {
+		echo "$id from $tablename was deleted successfully!";
+	}
+}
 
 ///* BEGIN STATIC DATA FUNCTIONS */
 //

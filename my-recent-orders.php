@@ -1,7 +1,10 @@
 <?php
 session_start();
-require_once("header.php");
 require_once("authenticate.php");
+require_once("functions-lib.php");
+require_once("header.php");
+$url = explode('?tabletype=', get_url());
+$tabletype = $url[1];
 ?>
 
 <style type="text/css">
@@ -11,20 +14,16 @@ a:visited{color:#9fa615;}
 a:hover{color:white;}
 a:active{color:white;}
 </style>
-<?php //require_once('customer-nav.php'); ?>
 
+
+<form class="formtable" action="process-delete-orders.php" method="POST" enctype="multipart/form-data">
 <h1 class="h1_titles">My Recent Orders</h1>
-<table class="tftable" border="1">
-<tr><th>Id#</th><th>Customer Name</th><th>Order Name</th><th>Type</th><th>Due Date</th><th>Date Submited</th><th>Status</th><th>File</th><th>Special Instructions</th><th>Delete</th></tr>
-
 <?php
 	$sort = 'date_submitted';
 	$orders = retrieve_orders($sort);
-	echo build_orders_table($orders);
+	echo build_orders_table($orders, $tabletype);
 ?>
-
-</table>
-
+</form>
 
 <?php
 include("footer.php");

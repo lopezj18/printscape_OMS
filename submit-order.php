@@ -20,7 +20,6 @@ if($is_customer) $customer_info = retrieve_customer_info();
         </select></p>
         
         <p><input type="date" placeholder="Due Date mm/dd/yyyy" name="due_date"></p>
-        
         <p><textarea rows="8" cols="33"  maxlength="150" type="text" placeholder="Special Instructions (Please Limit Your Instructions to 150 characters)" name="special_instructions"></textarea></p>
 
         <div id="drop">

@@ -1,14 +1,14 @@
 <?php
 require_once("functions-lib.php");
 
-print_r($_POST);
-////call the run_my_query()function from that include
-//$delete_id=$_POST['delete_id'];
-
+//$userstodelete = array();
 		
-$query = "DELETE FROM customers WHERE id = $results .= $customers[$i]['id']";
+	foreach($_POST['deletecheckbox'] as $checkbox){
+		$checkbox = sanitize($checkbox);
+		delete('customers', $checkbox);
+	}
 	
 			
-////redirect them to view home page
-//header('Location:admin-all-users.php');
+////redirect them to view delete page
+header('Location:admin-all-clients.php?tabletype=delete');
 ?>
